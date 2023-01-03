@@ -41,4 +41,39 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    // Fonction qui précise la relation avec la table "Roles"
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
+
+    // Fonction qui précise la relation avec la table "Adresses"
+    public function adresses()
+    {
+        return $this->hasMany(Adresse::class);
+    }
+
+    // Fonction qui précise la relation avec la table "Avis"
+    public function avis()
+    {
+        return $this->hasMany(Avis::class);
+    }
+
+    // Fonction qui précise la relation avec la table "Articles"
+    public function favoris()
+    {
+        return $this->belongsToMany(Articles::class, 'favoris');
+    }
+
+    // Fonction qui précise la relation avec la table "Commandes"
+    public function commandes()
+    {
+        return $this->hasMany(Commande::class);
+    }
+
+    public function isAdmin()
+    {
+        return $this->role_id === 2;
+    }
 }
