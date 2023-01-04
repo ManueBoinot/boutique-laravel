@@ -15,6 +15,6 @@ class AvisSeeder extends Seeder
     public function run()
     {
         // Création de 20 profils aléatoires avec la factory
-        \App\Models\Avis::factory(30)->create();
+        \App\Models\Avis::factory(100)->create();
     }
 }

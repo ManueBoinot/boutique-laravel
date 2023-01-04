@@ -4,8 +4,9 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\Role;
 
-class AdresseSeeder extends Seeder
+class RoleSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,7 +15,12 @@ class AdresseSeeder extends Seeder
      */
     public function run()
     {
-        // Création de 20 profils aléatoires avec la factory
-        \App\Models\Adresse::factory(60)->create();
+        Role::create([
+            'role' => 'user'
+        ]);
+
+        Role::create([
+            'role' => 'admin'
+        ]);
     }
 }
