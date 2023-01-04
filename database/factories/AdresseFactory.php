@@ -17,8 +17,8 @@ class AdresseFactory extends Factory
     public function definition()
     {
         return [
-            'rue' => fake()->address(),
-            'code_postal' => random_int(01000, 95900),
+            'rue' => fake()->streetAddress(),
+            'code_postal' =>fake()->postcode(),
             'commune' => fake()->city(),
             'user_id' => random_int(1, 30)
         ];
