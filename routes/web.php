@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,10 +14,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// AFFICHAGE PAGE D'ACCUEIL ----------------------
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 
 Auth::routes();
 
+// Route vers ACCUEIL si utilisateur connecté ----------------------
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
