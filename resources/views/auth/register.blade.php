@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card bg-black" style="border: 1px solid gold;">
+            <div class="card text-bg-dark" style="border: 1px solid gold;">
                 <div class="card-header fs-3">{{ __('CRÉATION DE COMPTE CLIENT') }}</div>
 
                 <div class="card-body fs-4">
