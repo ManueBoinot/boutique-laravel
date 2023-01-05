@@ -27,9 +27,9 @@
 
 <body class="text-bg-dark" style="font-family:Markazi Text, serif;">
 
-    <div id="app">
+    <div id="app" class="sticky-top">
         {{-- NAVBAR ---------------------------------------------------------- --}}
-        <nav class="navbar navbar-expand-lg navbar-dark">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="z-index: 2">
             <div class="container">
                 {{-- LOGO ---------------------------------------------------------- --}}
                 <a class="navbar-brand me-auto" href="{{ url('http://127.0.0.1:8000/') }}">
@@ -45,7 +45,7 @@
                     @endif
 
                     @if (Route::has('register'))
-                        <button type="button" class="btn btn-outline-warning nav-item fs-3">
+                        <button type="button" class="btn btn-outline-warning nav-item fs-3 ms-5">
                             <a class="nav-link" href="{{ route('register') }}">{{ __('Créer un compte') }}</a>
                         </button>
                     @endif
@@ -89,7 +89,18 @@
                                     <li>
                                         <hr class="dropdown-divider">
                                     </li>
-                                    <li><a class="dropdown-item text-danger fs-3" href="#">DÉCONNEXION</a></li>
+                                    <li> {{-- lien pour se déconnecter --}}
+                                        <a class="dropdown-item text-danger fs-3" href="{{ route('logout') }}"
+                                            onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                            {{ __('DÉCONNEXION') }}
+                                        </a>
+
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                            class="d-none">
+                                            @csrf
+                                        </form>
+                                    </li>
                                 </ul>
                             </li>
                         </ul>
@@ -128,14 +139,19 @@
     </main>
 
     {{-- FOOTER ---------------------------------------------------------- --}}
-    <footer class="container-fluid fixed-bottom text-center">
+    <footer class="container-fluid text-center">
         <div class="container mb-3">
             <ul class="list-group list-group-flush d-flex flex-row flex-wrap">
-                <li class="text-white list-group-item text-bg-dark mx-auto"><a class="text-decoration-none text-light" href="/produits">Nos produits</a></li>
-                <li class="text-white list-group-item text-bg-dark mx-auto"><a class="text-decoration-none text-light" href="/promotions">Promotions</a></li>
-                <li class="text-white list-group-item text-bg-dark mx-auto"><a class="text-decoration-none text-light" href="/profil">Espace client</a></li>
-                <li class="text-white list-group-item text-bg-dark mx-auto"><a class="text-decoration-none text-light" href="/a-propos">À propos</a></li>
-                <li class="text-white list-group-item text-bg-dark mx-auto"><a class="text-decoration-none text-light" href="/contact">Contact</a></li>
+                <li class="text-white list-group-item text-bg-dark mx-auto"><a class="text-decoration-none text-light"
+                        href="/produits">Nos produits</a></li>
+                <li class="text-white list-group-item text-bg-dark mx-auto"><a class="text-decoration-none text-light"
+                        href="/promotions">Promotions</a></li>
+                <li class="text-white list-group-item text-bg-dark mx-auto"><a class="text-decoration-none text-light"
+                        href="/profil">Espace client</a></li>
+                <li class="text-white list-group-item text-bg-dark mx-auto"><a class="text-decoration-none text-light"
+                        href="/a-propos">À propos</a></li>
+                <li class="text-white list-group-item text-bg-dark mx-auto"><a class="text-decoration-none text-light"
+                        href="/contact">Contact</a></li>
             </ul>
         </div>
 

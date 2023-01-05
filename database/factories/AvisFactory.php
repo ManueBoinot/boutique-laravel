@@ -20,7 +20,7 @@ class AvisFactory extends Factory
             'user_id' => random_int(1, 30),
             'article_id' => random_int(1, 12),
             'texte' => fake()->text(),
-            'note' => random_int(1,5),
+            'note' => random_int(3,5),
         ];
     }
 }

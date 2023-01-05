@@ -18,7 +18,7 @@ class Commande extends Model
     // Fonction qui précise la relation avec la table "Articles"
     public function articles()
     {
-        return $this->belongsToMany(Article::class, 'articles_commandes')->withPivot('quantite');
+        return $this->belongsToMany(Article::class, 'article_commandes')->withPivot('quantite');
     }
 
     // Fonction qui précise la relation avec la table "Adresses"
