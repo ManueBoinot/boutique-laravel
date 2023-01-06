@@ -5,19 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Campagne;
 use App\Models\Article;
-use App\Models\Avis;
 
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
 
     /**
      * Show the application dashboard.
@@ -41,16 +31,20 @@ class HomeController extends Controller
             $promo = null;
         }
 
-        return view('home', ['promo' => $promo]);
+        // Pour affichage de 3 articles random si pas de promo en cours
+        
+        $articles = Article::limit(3)->get();
 
         // Fonction TOP RATED --------------------------------------------------
-        // $top_rated = Avis::with(['articles' => function ($query) {
-        //     $query->limit(3);
-        // }])
-        
-        // ->where('note', '==', '5')
-        // ->get();
+        $top_rated = Article::orderBy('note_moyenne', 'desc')
+            ->limit(3)
+            ->with(['campagnes' => function ($query) {
+                $query->whereDate('date_debut', '<=', date('Y-m-d'))
+                    ->whereDate('date_fin', '>=', date('Y-m-d'))
+                    ->get();
+            }])
+            ->get();
 
-        // return view('home', ['top_rated' => $top_rated]);
+        return view('home', ['top_rated' => $top_rated, 'promo' => $promo, 'articles' => $articles]);
     }
 }

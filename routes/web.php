@@ -14,12 +14,11 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-// AFFICHAGE PAGE D'ACCUEIL ----------------------
-Route::get('/', function () {
-    return view('home');
-});
-
 Auth::routes();
 
-// Route vers ACCUEIL si utilisateur connecté ----------------------
+// HOME ----------------------
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// HOME ----------------------
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// ARTICLE DETAIL ----------------------
+Route::get('{article}', [App\Http\Controllers\ArticleController::class, 'show'])->name('article-detail');

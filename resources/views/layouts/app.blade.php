@@ -32,32 +32,17 @@
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="z-index: 2">
             <div class="container">
                 {{-- LOGO ---------------------------------------------------------- --}}
-                <a class="navbar-brand me-auto" href="{{ url('http://127.0.0.1:8000/') }}">
+                <a class="navbar-brand me-auto" href="{{ url('http://127.0.0.1:8000/home') }}">
                     <h1 class="m-0 p-0" style="font-family:Passions Conflict, serif; color: #ffe140; font-size: 8rem;">
                         {{ config('app.name', 'Chocacao') }}</h1>
                 </a>
-                <!-- AFFICHAGE POUR VISITEURS --------------------------------------- -->
-                @guest
-                    @if (Route::has('login'))
-                        <button type="button" class="btn btn-warning nav-item fs-3">
-                            <a class="nav-link" href="{{ route('login') }}">{{ __('Se connecter') }}</a>
-                        </button>
-                    @endif
 
-                    @if (Route::has('register'))
-                        <button type="button" class="btn btn-outline-warning nav-item fs-3 ms-5">
-                            <a class="nav-link" href="{{ route('register') }}">{{ __('Créer un compte') }}</a>
-                        </button>
-                    @endif
-
-                    <!-- AFFICHAGE POUR USERS CONNECTÉS -------------------------------- -->
-                @else
-                    {{-- BURGER ---------------------- --}}
-                    <button class="navbar-toggler mx-auto fs-1" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
+                {{-- BURGER ---------------------- --}}
+                <button class="navbar-toggler mx-auto fs-1" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
                     {{-- NAVBAR BOUTONS ---------------------- --}}
                     <div class="collapse navbar-collapse text-center" id="navbarSupportedContent">
@@ -76,43 +61,60 @@
                                         class="fa-solid fa-cart-shopping"></i></a>
                             </li>
                             {{-- Lien vers ESPACE CLIENT --------------------- --}}
-                            <li class="nav-item dropdown px-4">
-                                <a class="nav-link dropdown-toggle fs-3 text-light" href="#" role="button"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                    <i class="fa-solid fa-user"></i>
-                                </a>
-                                <ul class="dropdown-menu text-bg-dark">
-                                    <li><a class="dropdown-item text-light fs-3" href="#">Mes favoris</a></li>
-                                    <li><a class="dropdown-item text-light fs-3" href="#">Mes commandes</a></li>
-                                    <li><a class="dropdown-item text-light fs-3" href="#">Mes informations
-                                            personnelles</a></li>
-                                    <li>
-                                        <hr class="dropdown-divider">
-                                    </li>
-                                    <li> {{-- lien pour se déconnecter --}}
-                                        <a class="dropdown-item text-danger fs-3" href="{{ route('logout') }}"
-                                            onclick="event.preventDefault();
+                            @if (Auth::user())
+                                <li class="nav-item dropdown px-4">
+                                    <a class="nav-link dropdown-toggle fs-3 text-light" href="#" role="button"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="fa-solid fa-user"></i>
+                                    </a>
+                                    <ul class="dropdown-menu text-bg-dark">
+                                        <li><a class="dropdown-item text-light fs-3" href="#">Mes favoris</a></li>
+                                        <li><a class="dropdown-item text-light fs-3" href="#">Mes commandes</a></li>
+                                        <li><a class="dropdown-item text-light fs-3" href="#">Mes informations
+                                                personnelles</a></li>
+                                        <li>
+                                            <hr class="dropdown-divider">
+                                        </li>
+                                        <li> {{-- lien pour se déconnecter --}}
+                                            <a class="dropdown-item text-danger fs-3" href="{{ route('logout') }}"
+                                                onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                            {{ __('DÉCONNEXION') }}
-                                        </a>
+                                                {{ __('DÉCONNEXION') }}
+                                            </a>
 
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                            class="d-none">
-                                            @csrf
-                                        </form>
-                                    </li>
-                                </ul>
-                            </li>
+                                            <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                                class="d-none">
+                                                @csrf
+                                            </form>
+                                        </li>
+                                    </ul>
+                                </li>
+                            @else
+                                <li class="nav-item dropdown px-4">
+                                    <a class="nav-link dropdown-toggle fs-3 text-light" href="#" role="button"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="fa-solid fa-user"></i>
+                                    </a>
+                                    <ul class="dropdown-menu text-bg-dark">
+                                        <li class="nav-item">
+                                            <a class="nav-link text-light fs-4" href="{{ route('login') }}">{{ __('Se connecter') }}</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link text-light fs-4" href="{{ route('register') }}">{{ __('Créer un compte') }}</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            @endif
                         </ul>
                     </div>
-                @endguest
             </div>
         </nav>
 
-        {{-- BANDEAU PROMOTION ---------------------------------------------------------- --}}
+        {{-- BANDEAU PROMOTION SI PROMO EN COURS ------------------------------------------ --}}
         <div class="container-fluid" id="bandeau-promo">
             @include('bandeau-promo')
         </div>
+
     </div>
 
 

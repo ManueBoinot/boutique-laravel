@@ -21,6 +21,7 @@ return new class extends Migration
             $table->float('prix');
             $table->string('image');
             $table->integer('stock');
+            $table->float('note_moyenne');
             $table->timestamps();
         });
     }
