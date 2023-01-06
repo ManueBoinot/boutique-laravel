@@ -18,8 +18,11 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-
-
+Route::get('panier', [App\Http\Controllers\PanierController::class,'afficher'])->name('panier.afficher');
+Route::post('panier.ajouter/{article}', [App\Http\Controllers\PanierController::class,'ajouter'])->name('panier.ajouter');
+Route::get('panier.supprimer/{article}', [App\Http\Controllers\PanierController::class,'supprimer'])->name('panier.supprimer');
+Route::get('panier.vider', [App\Http\Controllers\PanierController::class,'vider'])->name('panier.vider');
+Route::post('commande', [App\Http\Controllers\CommandeController::class, 'valider'])->name('commande.valider');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::resource('/articles', App\Http\Controllers\ArticleController::class);

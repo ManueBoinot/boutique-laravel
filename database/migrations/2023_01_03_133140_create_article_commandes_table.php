@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('article_commandes', function (Blueprint $table) {
+        Schema::create('articles_commandes', function (Blueprint $table) {
             $table->foreignId('commande_id')->constrained()->cascadeOnDelete();
             $table->foreignId('article_id')->constrained()->cascadeOnDelete();
             $table->integer('quantite');
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('article_commandes');
+        Schema::dropIfExists('articles_commandes');
     }
 };
