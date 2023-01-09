@@ -14,7 +14,7 @@
                             <img src="{{ $article->image }}" class="img-fluid rounded-start" alt="{{ $article->nom }}">
 
                             {{-- Bouton VOIR PRODUIT --}}
-                            <a href="{{ route('article.show', $article) }}" class="btn btn-light fs-5 mt-4"
+                            <a href="{{ route('articles.show', $article) }}" class="btn btn-light fs-5 mt-4"
                                 role="button">Voir le produit</a>
                         </div>
 
@@ -89,7 +89,7 @@
                             <img src="{{ $article->image }}" class="img-fluid rounded-start"
                                 alt="{{ $article->nom }}">
                             {{-- Bouton VOIR PRODUIT --}}
-                            <a href="{{ route('article.show', $article) }}" class="btn btn-light fs-5 mt-4"
+                            <a href="{{ route('articles.show', $article) }}" class="btn btn-light fs-5 mt-4"
                                 role="button">Voir le produit</a>
                         </div>
                         <div class="col-md-6">

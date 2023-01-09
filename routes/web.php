@@ -26,9 +26,6 @@ Route::post('panier.ajouter/{article}', [App\Http\Controllers\PanierController::
 Route::get('panier.supprimer/{article}', [App\Http\Controllers\PanierController::class, 'supprimer'])->name('panier.supprimer');
 Route::get('panier.vider', [App\Http\Controllers\PanierController::class, 'vider'])->name('panier.vider');
 
-// COMMANDE ----------------------------
-Route::post('commande', [App\Http\Controllers\CommandeController::class, 'valider'])->name('commande.valider');
-
 // USER -----------------------------------
 Route::put('/user/modif-password/{user}', [App\Http\Controllers\UserController::class, 'updatePassword'])->name('updatePassword');
 

@@ -23,16 +23,17 @@ class CommandeController extends Controller
         return view('users.commande', ['user' => $user]); // on retourne la vue pour afficher les commandes en y injectant le user
     }
 
-    public function store(Request $request){
-       
+    public function store(Request $request)
+    {
+
         $user = Auth::user();
         $commande = new Commande();
         $commande->numero = rand(10000, 99999);
         $commande->adresse_id = $request->input('adresse');
-        $commande->prix = $request->input('total')+$request->input('livraison');
+        $commande->prix = session()->get('total') + $request->input('livraison');
         $commande->user_id = $user->id;
         $commande->save();
- 
+
         $panier = session('panier');
 
         foreach ($panier as $article) {
@@ -44,8 +45,8 @@ class CommandeController extends Controller
         }
         session()->forget("panier");
 
-        return redirect()->route('home')->with('message', 'LA commande a bien été validé');  
-   
+        return redirect()->route('home')->with('message', 'La commande a bien été validée');
+
     }
 
     /**
@@ -59,7 +60,7 @@ class CommandeController extends Controller
     }
 
 
-     * @param  \Illuminate\Http\Request  $request
+    /** @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
 
@@ -73,12 +74,12 @@ class CommandeController extends Controller
     public function show(Commande $commande)
     {
         $commande->load('articles');
-        return view('users/detailscommande', ['commande'=>$commande]);
+        return view('users/detailscommande', ['commande' => $commande]);
 
     }
 
 
-     * @param  int  $id
+    /** @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -109,4 +110,3 @@ class CommandeController extends Controller
         //
     }
 }
-

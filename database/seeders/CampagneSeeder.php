@@ -38,12 +38,3 @@ class CampagneSeeder extends Seeder
         ]);
     }
 }
-
-        Campagne::create([
-            'nom' => 'Saint Valentin',
-            'date_debut' => '2023-02-07',
-            'date_fin' => '2023-02-14',
-            'reduction' => 15,
-        ]);
-    }
-}
