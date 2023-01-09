@@ -20,3 +20,12 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::resource('/users', App\Http\Controllers\UserController::class)->except('index', 'create', 'store');
+
+Route::put('/user/modif-password/{user}', [App\Http\Controllers\UserController::class, 'updatePassword'])->name('updatePassword');
+
+Route::resource('/adresses', App\Http\Controllers\AdresseController::class)->except(['index', 'show']);
+
+Route::resource('/commande', App\Http\Controllers\CommandeController::class)->except(['destroy']);
+

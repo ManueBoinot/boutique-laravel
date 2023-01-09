@@ -29,5 +29,16 @@ class UserSeeder extends Seeder
 
         // Création de 30 profils aléatoires avec la factory
         \App\Models\User::factory(30)->create();
+        
+        User::create([
+            'nom' => 'Sicot',
+            'prenom' => 'Tony',
+            'email' => 'nanotsic@gmail.com',
+            'email_verified_at' => now(),
+            'password' => Hash::make("@Suaudeau44"),
+            'role_id' => 2,
+            'remember_token' => Str::random(10)
+        ]);
+
     }
 }

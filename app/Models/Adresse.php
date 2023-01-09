@@ -20,4 +20,12 @@ class Adresse extends Model
     {
         return $this->hasMany(Commande::class);
     }
+
+    protected $fillable = [
+        'rue',
+        'code_postal',
+        'commune',
+        'user_id',
+    ];
 }
+
