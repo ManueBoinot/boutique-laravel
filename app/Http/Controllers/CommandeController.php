@@ -23,7 +23,13 @@ class CommandeController extends Controller
         return view('users.commande', ['user' => $user]); // on retourne la vue pour afficher les commandes en y injectant le user
     }
 
-    public function store(Request $request){
+    /**
+     * 
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
        
         $user = Auth::user();
         $commande = new Commande();
@@ -44,9 +50,9 @@ class CommandeController extends Controller
         }
         session()->forget("panier");
 
-        return redirect()->route('home')->with('message', 'LA commande a bien été validé');  
-   
+        return redirect()->route('home')->with('message', 'La commande a bien été validée');  
     }
+    
 
     /**
      * Show the form for creating a new resource.
@@ -57,12 +63,6 @@ class CommandeController extends Controller
     {
         //
     }
-
-
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-
 
     /**
      * Display the specified resource.
@@ -77,36 +77,4 @@ class CommandeController extends Controller
 
     }
 
-
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }
-

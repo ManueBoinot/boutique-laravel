@@ -18,12 +18,17 @@ class PanierController extends Controller
             $user->load('adresses');
         }
 
-        return view("panier.afficher", ['user' => $user]);
+        return view('panier.afficher', ['user' => $user]);
     }
 
+    /**
+     * 
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function ajouter(Article $article, Request $request)
     {
-        $panier = session()->get("panier");
+        $panier = session()->get('panier');
         $quantite = $request->input('quantite');
 
         $detail_article = [
@@ -40,16 +45,21 @@ class PanierController extends Controller
 
         session()->put('panier', $panier);
 
-        return redirect()->route('panier.afficher')->with('message', 'Le poduit a été ajouté/modifié');
+        return redirect()->route('panier.afficher')->with('message', 'Le produit a été ajouté/modifié');
 
     }
 
 
+    /**
+     * 
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function supprimer(Article $article)
     {
-        $panier = session()->get("panier");
+        $panier = session()->get('panier');
         unset($panier[$article->id]);
-        session()->put("panier", $panier);
+        session()->put('panier', $panier);
 
         return redirect()->route('panier.afficher')->with('message', 'Le produit a bien été supprimé');
     }
@@ -57,7 +67,7 @@ class PanierController extends Controller
     # Vider le panier
     public function vider()
     {
-        session()->forget("panier");
+        session()->forget('panier');
         return redirect()->route('panier.afficher')->with('message', 'Le panier a été vidé');
     }
 
