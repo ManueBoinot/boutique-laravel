@@ -21,27 +21,22 @@ class ArticleCampagneSeeder extends Seeder
         ]);
 
         DB::table('article_campagnes')->insert([
-            'article_id' => 2,
-            'campagne_id' => 1,
-        ]);
-
-        DB::table('article_campagnes')->insert([
-            'article_id' => 3,
-            'campagne_id' => 1,
-        ]);
-
-        DB::table('article_campagnes')->insert([
-            'article_id' => 4,
-            'campagne_id' => 1,
-        ]);
-
-        DB::table('article_campagnes')->insert([
             'article_id' => 5,
-            'campagne_id' => 2,
+            'campagne_id' => 1,
         ]);
 
         DB::table('article_campagnes')->insert([
-            'article_id' => 6,
+            'article_id' => 9,
+            'campagne_id' => 1,
+        ]);
+
+        DB::table('article_campagnes')->insert([
+            'article_id' => 13,
+            'campagne_id' => 1,
+        ]);
+
+        DB::table('article_campagnes')->insert([
+            'article_id' => 2,
             'campagne_id' => 2,
         ]);
 
@@ -51,12 +46,17 @@ class ArticleCampagneSeeder extends Seeder
         ]);
 
         DB::table('article_campagnes')->insert([
-            'article_id' => 8,
+            'article_id' => 14,
             'campagne_id' => 2,
         ]);
 
         DB::table('article_campagnes')->insert([
-            'article_id' => 9,
+            'article_id' => 4,
+            'campagne_id' => 2,
+        ]);
+
+        DB::table('article_campagnes')->insert([
+            'article_id' => 8,
             'campagne_id' => 3,
         ]);
 
@@ -66,9 +66,16 @@ class ArticleCampagneSeeder extends Seeder
         ]);
 
         DB::table('article_campagnes')->insert([
-            'article_id' => 11,
+            'article_id' => 6,
             'campagne_id' => 3,
         ]);
+
+        DB::table('article_campagnes')->insert([
+            'article_id' => 3,
+            'campagne_id' => 3,
+        ]);
+    }
+}
 
         DB::table('article_campagnes')->insert([
             'article_id' => 12,

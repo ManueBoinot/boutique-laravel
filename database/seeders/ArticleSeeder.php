@@ -22,6 +22,7 @@ class ArticleSeeder extends Seeder
             'prix' => 20,
             'image' => 'images/truffe-noir.jpg',
             'stock' => 10,
+            'note_moyenne'  => 4.2
         ]);
 
         Article::create([
@@ -31,6 +32,7 @@ class ArticleSeeder extends Seeder
             'prix' => 15,
             'image' => 'images/mendiant-noir.jpeg',
             'stock' => 10,
+            'note_moyenne'  => 4.1
         ]);
 
         Article::create([
@@ -40,6 +42,7 @@ class ArticleSeeder extends Seeder
             'prix' => 12,
             'image' => 'images/orangette-noir.jpg',
             'stock' => 10,
+            'note_moyenne'  => 4.8
         ]);
 
         Article::create([
@@ -49,6 +52,7 @@ class ArticleSeeder extends Seeder
             'prix' => 10,
             'image' => 'images/escargot-noir.jpg',
             'stock' => 10,
+            'note_moyenne'  => 3.4
         ]);
 
         Article::create([
@@ -58,6 +62,7 @@ class ArticleSeeder extends Seeder
             'prix' => 22,
             'image' => 'images/truffe-lait.jpg',
             'stock' => 10,
+            'note_moyenne'  => 3.6
         ]);
 
         Article::create([
@@ -67,6 +72,7 @@ class ArticleSeeder extends Seeder
             'prix' => 17,
             'image' => 'images/mendiant-lait.jpg',
             'stock' => 10,
+            'note_moyenne'  => 4.7
         ]);
 
         Article::create([
@@ -76,6 +82,7 @@ class ArticleSeeder extends Seeder
             'prix' => 14,
             'image' => 'images/orangette-lait.jpg',
             'stock' => 10,
+            'note_moyenne'  => 3.9
         ]);
 
         Article::create([
@@ -85,6 +92,7 @@ class ArticleSeeder extends Seeder
             'prix' => 12,
             'image' => 'images/escargot-lait.jpg',
             'stock' => 10,
+            'note_moyenne'  => 4.1
         ]);
 
         Article::create([
@@ -94,6 +102,7 @@ class ArticleSeeder extends Seeder
             'prix' => 23,
             'image' => 'images/truffe-blanc.jpg',
             'stock' => 10,
+            'note_moyenne'  => 2.8
         ]);
 
         Article::create([
@@ -103,6 +112,7 @@ class ArticleSeeder extends Seeder
             'prix' => 18,
             'image' => 'images/mendiant-blanc.jpg',
             'stock' => 10,
+            'note_moyenne'  => 3.9
         ]);
 
         Article::create([
@@ -112,6 +122,7 @@ class ArticleSeeder extends Seeder
             'prix' => 13,
             'image' => 'images/orangette-blanc.jpg',
             'stock' => 10,
+            'note_moyenne'  => 3.1
         ]);
 
         Article::create([
@@ -121,6 +132,7 @@ class ArticleSeeder extends Seeder
             'prix' => 9,
             'image' => 'images/escargot-blanc.jpg',
             'stock' => 10,
+            'note_moyenne'  => 3.6
         ]);
 
     }

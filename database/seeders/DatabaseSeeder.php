@@ -21,6 +21,8 @@ class DatabaseSeeder extends Seeder
             AdresseSeeder::class,
             GammeSeeder::class,
             ArticleSeeder::class,
+            CampagneSeeder::class,
+            ArticleCampagneSeeder::class,
             AvisSeeder::class,
             CommandeSeeder::class,
             CommandeArticleSeeder::class

@@ -13,14 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('articles', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('gamme_id')->constrained()->cascadeOnDelete();
-            $table->string('nom');
-            $table->text('description');
-            $table->float('prix');
-            $table->string('image');
-            $table->integer('stock');
+        Schema::create('article_campagnes', function (Blueprint $table) {
+            $table->foreignId('article_id');
+            $table->foreignId('campagne_id');
             $table->timestamps();
         });
     }
@@ -32,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('articles');
+        Schema::dropIfExists('article_campagnes');
     }
 };

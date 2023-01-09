@@ -18,8 +18,8 @@ class CampagneSeeder extends Seeder
 
         Campagne::create([
             'nom' => 'Fêtes de fin d\'année',
-            'date_debut' => '2022-12-10',
-            'date_fin' => '2022-12-31',
+            'date_debut' => '2022-12-15',
+            'date_fin' => '2023-01-15',
             'reduction' => 15,
         ]);
 
@@ -36,7 +36,8 @@ class CampagneSeeder extends Seeder
             'date_fin' => '2023-02-14',
             'reduction' => 15,
         ]);
-    }}
+    }
+}
 
         Campagne::create([
             'nom' => 'Saint Valentin',

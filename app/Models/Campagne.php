@@ -12,6 +12,6 @@ class Campagne extends Model
     // Fonction qui précise la relation avec la table "Articles"
     public function articles()
     {
-        return $this->belongsToMany(Article::class, 'articles_campagnes');
+        return $this->belongsToMany(Article::class, 'article_campagnes');
     }
 }
