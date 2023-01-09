@@ -2,7 +2,7 @@
 
 @section('content')
 
-@include('top-promo')
-@include('top-rated')
+@include('boutique.top-promo')
+@include('boutique.top-rated')
 
 @endsection

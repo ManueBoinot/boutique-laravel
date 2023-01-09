@@ -112,9 +112,9 @@
 
         {{-- BANDEAU PROMOTION SI PROMO EN COURS ------------------------------------------ --}}
         <div class="container-fluid" id="bandeau-promo">
-            @include('bandeau-promo')
+            @php $promo = todayPromo() @endphp
+            @include('boutique.bandeau-promo')
         </div>
-
     </div>
 
 
