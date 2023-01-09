@@ -57,12 +57,14 @@
 					</tr> 
 				@endforeach
 				<tr colspan="2" >
-					<td colspan="4" >Total général</td>
+					<td colspan="4" >Total Produits:</td>
 					<td colspan="2">
 						<!-- On affiche total général -->
 						<strong>{{ $total }} €</strong>
 					</td>
 				</tr>
+
+
 			</tbody>
 
 		</table>
@@ -74,21 +76,29 @@
 	@else
 	<div class="alert alert-info">Aucun produit au panier</div>
 	@endif
-    @auth
 
+<div class="alert alert-info">Pour continuer, Connectez vous</div>
+    @auth
     <form method="post" action="{{ route('commande.valider', $article) }}">
     @csrf
     <input type="hidden" name="total" value="{{ $total }}">
     <select name="adresse" class="form-control">
      
- @foreach ($adresses as $adresse)
+    @foreach ($user->adresses as $adresse)
     <option value="{{ $adresse['id'] }}">{{ $adresse['rue'] }}</option>  
     @endforeach
 
     </select>
+	<select name="livraison" class="form-control">>
+		<option selected="selected" value="10" >Livraison à domicile 10€</option>
+		<option  value="5" >Livraison dans un point relais 5€</option>
+		<option  value= "15" >Livraison expresse 15€</option>
+		</select>
     <button class="btn btn-success mt-2" type="submit">Valider</button>
     </form>
     @endauth
+
+	
 </div>
 
 @endsection

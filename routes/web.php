@@ -23,6 +23,7 @@ Route::post('panier.ajouter/{article}', [App\Http\Controllers\PanierController::
 Route::get('panier.supprimer/{article}', [App\Http\Controllers\PanierController::class,'supprimer'])->name('panier.supprimer');
 Route::get('panier.vider', [App\Http\Controllers\PanierController::class,'vider'])->name('panier.vider');
 Route::post('commande', [App\Http\Controllers\CommandeController::class, 'valider'])->name('commande.valider');
+//Route::get('articles.modifier/{article}', [App\Http\Controllers\ArticleController::class, 'edit'])->name('articles.modifier');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::resource('/articles', App\Http\Controllers\ArticleController::class);

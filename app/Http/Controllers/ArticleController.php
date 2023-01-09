@@ -56,9 +56,9 @@ class ArticleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Article $article)
     {
-        //
+        return view('articles.modifier',['article'=>$article]);
     }
 
     /**
@@ -68,9 +68,22 @@ class ArticleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Article $article)
     {
-        //
+        $request->validate([
+            'nom' => 'required | min:1| max:40',
+            'prix' => 'nullable | min:1 | max:10',
+            'stock' => 'nullable | min:1 | max:10'
+
+        ]);
+
+        $article->update([
+            'nom' => $request->input('nom'),
+            'description' => $request->input('description'),
+            'prix' => $request->input('prix'),
+            'stock' => $request->input('stock')
+        ]);
+        return view('articles.modifier',['article'=>$article])->with('message','Modificatins effectuées');
     }
 
     /**

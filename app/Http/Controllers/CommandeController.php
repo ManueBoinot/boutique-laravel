@@ -16,7 +16,7 @@ class CommandeController extends Controller
         $commande = new Commande();
         $commande->numero = rand(10000, 99999);
         $commande->adresse_id = $request->input('adresse');
-        $commande->prix = $request->input('total');
+        $commande->prix = $request->input('total')+$request->input('livraison');
         $commande->user_id = $user->id;
         $commande->save();
  
@@ -29,8 +29,9 @@ class CommandeController extends Controller
             $articleInDatabase->stock -= $article['quantite'];
             $articleInDatabase->save();
         }
+        session()->forget("panier");
 
-       
+        return redirect()->route('home')->with('message', 'LA commande a bien été validé');  
    
     }
 }
