@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Article;
 use App\Models\Commande;
-use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CommandeController extends Controller
 {
@@ -22,6 +23,31 @@ class CommandeController extends Controller
         return view('users.commande', ['user' => $user]); // on retourne la vue pour afficher les commandes en y injectant le user
     }
 
+    public function store(Request $request){
+       
+        $user = Auth::user();
+        $commande = new Commande();
+        $commande->numero = rand(10000, 99999);
+        $commande->adresse_id = $request->input('adresse');
+        $commande->prix = $request->input('total')+$request->input('livraison');
+        $commande->user_id = $user->id;
+        $commande->save();
+ 
+        $panier = session('panier');
+
+        foreach ($panier as $article) {
+
+            $commande->articles()->attach($article['id'], ['quantite' => $article['quantite']]);
+            $articleInDatabase = Article::find($article['id']);
+            $articleInDatabase->stock -= $article['quantite'];
+            $articleInDatabase->save();
+        }
+        session()->forget("panier");
+
+        return redirect()->route('home')->with('message', 'LA commande a bien été validé');  
+   
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -32,16 +58,11 @@ class CommandeController extends Controller
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
+
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
-    }
+
 
     /**
      * Display the specified resource.
@@ -56,9 +77,7 @@ class CommandeController extends Controller
 
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
+
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
@@ -90,3 +109,4 @@ class CommandeController extends Controller
         //
     }
 }
+

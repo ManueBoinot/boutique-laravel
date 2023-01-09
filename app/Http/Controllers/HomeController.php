@@ -23,6 +23,10 @@ class HomeController extends Controller
      */
     public function index()
     {
+        if (!session()->has('panier')) {
+            session()->put('panier', []);
+        }
+
         return view('home');
     }
 }

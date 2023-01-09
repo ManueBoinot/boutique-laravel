@@ -9,6 +9,14 @@ class Article extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'nom',
+        'description',
+        'prix',
+        'stock',
+        
+    ];
+
     // Fonction qui précise la relation avec la table "Gammes"
     public function gamme()
     {

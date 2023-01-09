@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,7 +23,15 @@
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
     <script src="https://kit.fontawesome.com/cfc69e35cf.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/cfc69e35cf.js" crossorigin="anonymous"></script>
 </head>
+
+
+<body class="text-bg-dark" style="font-family:Markazi Text, serif;">
+
+    <div id="app" class="sticky-top">
+        {{-- NAVBAR ---------------------------------------------------------- --}}
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="z-index: 2">
 
 
 <body class="text-bg-dark" style="font-family:Markazi Text, serif;">
@@ -85,6 +94,17 @@
                                     <li><a class="dropdown-item text-light fs-3" href="#">Mes favoris</a></li>
                                     <li><a class="dropdown-item text-light fs-3" href="{{ route('commande.index', Auth::user()) }}">Mes commandes</a></li>
                                     <li><a class="dropdown-item text-light fs-3" href="{{ route('users.show', Auth::user()) }}">Mes informations
+                                            personnelles</a></li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                    <li> {{-- lien pour se déconnecter --}}
+                                        <a class="dropdown-item text-danger fs-3" href="{{ route('logout') }}"
+                                            onclick="event.preventDefault();
+                                <ul class="dropdown-menu text-bg-dark">
+                                    <li><a class="dropdown-item text-light fs-3" href="#">Mes favoris</a></li>
+                                    <li><a class="dropdown-item text-light fs-3" href="#">Mes commandes</a></li>
+                                    <li><a class="dropdown-item text-light fs-3" href="#">Mes informations
                                             personnelles</a></li>
                                     <li>
                                         <hr class="dropdown-divider">

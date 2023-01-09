@@ -75,4 +75,4 @@ class ArticleCampagneSeeder extends Seeder
             'campagne_id' => 3,
         ]);
     }
-} 
+}
