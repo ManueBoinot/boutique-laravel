@@ -57,7 +57,6 @@
                                             class="fa-solid fa-cart-plus fs-3"></i></button>
                                 </form>
                             </div>
-
                         @else
                             {{-- PRIX ARTICLE HORS PROMO --------------------------- --}}
                             <p class="card-text m-0"><span class="fs-3">{{ $article->prix }} €</span> (boîte de
@@ -73,7 +72,27 @@
                                 <button class="btn btn-lg btn-outline-warning m-1"><i
                                         class="fa-solid fa-cart-plus fs-3"></i></button>
                             </form>
-                        @endif
+
+                            {{-- Bouton FAVORIS --}}
+
+                            <!-- si l'article est dans les favoris -->
+
+                            @if (Auth::user() && Auth::user()->isInFavorites($article))
+                                <form method="post" action="{{ route('favoris.destroy') }}">
+                                    @csrf
+                                    @method('delete')
+                                    <input type="hidden" name="articleId" value="{{ $article->id }}">
+                                    <button type="submit" class="btn btn-danger m-2">Retirer des favoris</button>
+                                </form>
+
+                                <!-- si l'article n'est pas dans les favoris -->
+                            @else
+                                <form method="post" action="{{ route('favoris.store') }}"> @csrf
+                                    <input type="hidden" name="articleId" value="{{ $article->id }}">
+                                    <button type="submit" class="btn btn-success m-2">Ajouter aux favoris</button>
+                                </form>
+
+                            @endif
                     </div>
                 </div>
             </div>

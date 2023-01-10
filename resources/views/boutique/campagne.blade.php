@@ -12,7 +12,8 @@
             <div class="row rounded mx-auto my-5 p-2" style="box-shadow: 1px 1px 10px rgb(255,225,64)">
 
                 <div class="col-12">
-                    <h2 class="fst-italic">Du {{ date('d-m-Y', strtotime($campagne->date_debut)) }} au {{ date('d-m-Y', strtotime($campagne->date_fin)) }}</h2>
+                    <h2 class="fst-italic">Du {{ date('d-m-Y', strtotime($campagne->date_debut)) }} au
+                        {{ date('d-m-Y', strtotime($campagne->date_fin)) }}</h2>
                     <h2 class="text-uppercase mt-3">Promotion spéciale <span class="fs-1 fw-bold"
                             style="color: rgb(255,225,64)">{{ $campagne->nom }}</span> </h2>
                     <h3 class="fs-4"><span class="fs-2"
@@ -85,6 +86,27 @@
                                                     <button class="btn btn-outline-warning"><i
                                                             class="fa-solid fa-cart-plus p-0 m-0"></i></button>
                                                 </form>
+
+                                                {{-- Bouton FAVORIS --}}
+
+                                                <!-- si l'article est dans les favoris -->
+
+                                                @if (Auth::user() && Auth::user()->isInFavorites($article))
+                                                    <form method="post" action="{{ route('favoris.destroy') }}">
+                                                        @csrf
+                                                        @method('delete')
+                                                        <input type="hidden" name="articleId" value="{{ $article->id }}">
+                                                        <button type="submit" class="btn btn-danger m-2">Retirer des
+                                                            favoris</button>
+                                                    </form>
+
+                                                    <!-- si l'article n'est pas dans les favoris -->
+                                                @else
+                                                    <form method="post" action="{{ route('favoris.store') }}"> @csrf
+                                                        <input type="hidden" name="articleId" value="{{ $article->id }}">
+                                                        <button type="submit" class="btn btn-success m-2">Ajouter aux
+                                                            favoris</button>
+                                                    </form>
                                             </div>
 
                                         </div>

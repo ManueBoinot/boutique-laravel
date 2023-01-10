@@ -39,3 +39,11 @@ Route::resource('/commande', App\Http\Controllers\CommandeController::class)->ex
 Route::resource('/articles', App\Http\Controllers\ArticleController::class);
 Route::resource('/gammes', App\Http\Controllers\GammeController::class);
 Route::resource('/users', App\Http\Controllers\UserController::class)->except('index', 'create', 'store');
+
+// FAVORIS ----------------------------
+Route::get('favoris', [App\Http\Controllers\FavoriController::class, 'index'])->name('favoris.index');
+Route::post('favoris', [App\Http\Controllers\FavoriController::class, 'store'])->name('favoris.store');
+Route::delete('favoris', [App\Http\Controllers\FavoriController::class, 'destroy'])->name('favoris.destroy');
+
+// ADMIN ----------------------------
+Route::get('/admin', [App\Http\Controllers\AdminController::class, 'index'])->name('admin.index');
