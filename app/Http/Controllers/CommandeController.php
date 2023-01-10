@@ -7,6 +7,7 @@ use App\Models\Commande;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class CommandeController extends Controller
 {
@@ -30,6 +31,9 @@ class CommandeController extends Controller
      */
     public function store(Request $request)
     {
+        if (Gate::denies('validation_commande')) {
+            abort(403);
+        }
 
         $user = Auth::user();
         $commande = new Commande();

@@ -32,6 +32,9 @@ Route::get('panier.vider', [App\Http\Controllers\PanierController::class, 'vider
 // USER -----------------------------------
 Route::put('/user/modif-password/{user}', [App\Http\Controllers\UserController::class, 'updatePassword'])->name('updatePassword');
 
+// BACK OFFICE -----------------------------------
+Route::get('/admin', [App\Http\Controllers\AdminController::class, 'index'])->name('admin.index');
+
 // ROUTES MODE RESSOURCE (crée automatiquement les routes de base CRUD)
 Route::resource('/campagne', CampagneController::class);
 Route::resource('/adresses', App\Http\Controllers\AdresseController::class)->except(['index', 'show']);

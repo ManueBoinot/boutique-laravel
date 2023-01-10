@@ -23,4 +23,9 @@ class CampagneController extends Controller
     }
     
     // ___________________________________________________________________________
+
+    public function store()
+    {
+
+    }
 }
