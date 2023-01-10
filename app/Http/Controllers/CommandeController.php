@@ -30,15 +30,15 @@ class CommandeController extends Controller
      */
     public function store(Request $request)
     {
-       
+
         $user = Auth::user();
         $commande = new Commande();
         $commande->numero = rand(10000, 99999);
         $commande->adresse_id = $request->input('adresse');
-        $commande->prix = $request->input('total')+$request->input('livraison');
+        $commande->prix = $request->input('total') + $request->input('livraison');
         $commande->user_id = $user->id;
         $commande->save();
- 
+
         $panier = session('panier');
 
         foreach ($panier as $article) {
@@ -50,10 +50,10 @@ class CommandeController extends Controller
         }
         session()->forget("panier");
 
-        return redirect()->route('home')->with('message', 'La commande a bien été validée');  
+        return redirect()->route('home')->with('message', 'La commande a bien été validée');
     }
-    
 
+    // ___________________________________________________________________________
     /**
      * Show the form for creating a new resource.
      *
@@ -64,6 +64,7 @@ class CommandeController extends Controller
         //
     }
 
+    // ___________________________________________________________________________
     /**
      * Display the specified resource.
      *
@@ -73,8 +74,6 @@ class CommandeController extends Controller
     public function show(Commande $commande)
     {
         $commande->load('articles');
-        return view('users/detailscommande', ['commande'=>$commande]);
-
+        return view('users/detailscommande', ['commande' => $commande]);
     }
-
 }

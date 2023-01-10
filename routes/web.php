@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\CampagneController;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,7 +18,10 @@ use App\Http\Controllers\CampagneController;
 
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('boutique.home');
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+// ARTICLES POPULAIRES -----------------------
+Route::get('populaires', [App\Http\Controllers\ArticleController::class, 'popularite'])->name('article.popularite');
 
 // PANIER -----------------------
 Route::get('panier', [App\Http\Controllers\PanierController::class, 'afficher'])->name('panier.afficher');

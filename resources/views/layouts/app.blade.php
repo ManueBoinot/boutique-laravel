@@ -56,10 +56,6 @@
                                 <li><a class="dropdown-item text-light fs-3" href="/populaires">Populaires</a></li>
                             </ul>
                         </li>
-                        {{-- Lien vers GAMMES --------------------- --}}
-                        <li class="nav-item px-4">
-                            <a class="nav-link fs-3 text-light text-uppercase" href="/gammes">Gammes</a>
-                        </li>
                         {{-- Lien vers PROMOTIONS --------------------- --}}
                         <li class="nav-item px-4">
                             <a class="nav-link fs-3 text-light text-uppercase" href="/campagne">Promotions</a>
@@ -72,9 +68,9 @@
                         {{-- Lien vers ESPACE CLIENT --------------------- --}}
                         @if (Auth::user())
                             <li class="nav-item dropdown px-4">
-                                <a class="nav-link dropdown-toggle fs-3 text-light" href="#" role="button"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                    <i class="fa-solid fa-user"></i>
+                                <a class="nav-link dropdown-toggle fs-3" href="#" role="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false" style="color: rgb(255,225,64)">
+                                    <i class="fa-regular fa-user"></i>
                                 </a>
                                 <ul class="dropdown-menu text-bg-dark">
                                     <li><a class="dropdown-item text-light fs-3" href="#">Mes favoris</a></li>
@@ -102,9 +98,9 @@
                             </li>
                         @else
                             <li class="nav-item dropdown px-4">
-                                <a class="nav-link dropdown-toggle fs-3 text-light" href="#" role="button"
+                                <a class="nav-link dropdown-toggle fs-3"  style="color: rgb(255,225,64)" href="#" role="button"
                                     data-bs-toggle="dropdown" aria-expanded="false">
-                                    <i class="fa-solid fa-user"></i>
+                                    <i class="fa-regular fa-user" style="color: rgb(255,225,64)"></i>
                                 </a>
                                 <ul class="dropdown-menu text-bg-dark">
                                     <li class="nav-item">
@@ -155,7 +151,7 @@
 
     {{-- FOOTER ---------------------------------------------------------- --}}
     <footer class="container-fluid text-center">
-        <div class="container mb-3">
+        <div class="container mb-3 pt-5" style="border-top: 1px solid grey">
             <ul class="list-group list-group-flush d-flex flex-row flex-wrap">
                 <li class="text-white list-group-item text-bg-dark mx-auto"><a class="text-decoration-none text-light"
                         href="/produits">Nos produits</a></li>

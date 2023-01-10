@@ -18,7 +18,9 @@ class CampagneController extends Controller
         $campagnes = Campagne::with('articles')
             ->whereDate('date_fin', '>=', date('Y-m-d'))
             ->get();
-            
+
         return view('boutique.campagne', ['campagnes' => $campagnes]);
     }
+    
+    // ___________________________________________________________________________
 }

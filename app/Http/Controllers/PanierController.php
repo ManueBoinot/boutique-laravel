@@ -21,6 +21,7 @@ class PanierController extends Controller
         return view('panier.afficher', ['user' => $user]);
     }
 
+    // ___________________________________________________________________________
     /**
      * 
      *
@@ -46,10 +47,9 @@ class PanierController extends Controller
         session()->put('panier', $panier);
 
         return redirect()->route('panier.afficher')->with('message', 'Le produit a été ajouté/modifié');
-
     }
 
-
+    // ___________________________________________________________________________
     /**
      * 
      *
@@ -64,11 +64,11 @@ class PanierController extends Controller
         return redirect()->route('panier.afficher')->with('message', 'Le produit a bien été supprimé');
     }
 
+    // ___________________________________________________________________________    
     # Vider le panier
     public function vider()
     {
         session()->forget('panier');
         return redirect()->route('panier.afficher')->with('message', 'Le panier a été vidé');
     }
-
 }

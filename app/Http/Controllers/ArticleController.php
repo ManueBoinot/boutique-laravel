@@ -14,8 +14,19 @@ class ArticleController extends Controller
      */
     public function index()
     {
-    $articles = Article::orderBy('nom')->get();
-    return view('articles.index',['articles'=>$articles]);
+        $articles = Article::orderBy('nom')->get();
+        return view('articles.index', ['articles' => $articles]);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function popularite()
+    {
+        $articles = Article::orderBy('note_moyenne', 'desc')->get();
+        return view('boutique.populaires', ['articles' => $articles]);
     }
 
     /**
@@ -28,6 +39,7 @@ class ArticleController extends Controller
         //
     }
 
+    // ___________________________________________________________________________
     /**
      * Store a newly created resource in storage.
      *
@@ -39,6 +51,7 @@ class ArticleController extends Controller
         //
     }
 
+    // ___________________________________________________________________________
     /**
      * Display the specified resource.
      *
@@ -52,6 +65,7 @@ class ArticleController extends Controller
         ]);
     }
 
+    // ___________________________________________________________________________
     /**
      * Show the form for editing the specified resource.
      *
@@ -60,9 +74,10 @@ class ArticleController extends Controller
      */
     public function edit(Article $article)
     {
-        return view('articles.modifier',['article'=>$article]);
+        return view('articles.modifier', ['article' => $article]);
     }
 
+    // ___________________________________________________________________________
     /**
      * Update the specified resource in storage.
      *
@@ -85,9 +100,10 @@ class ArticleController extends Controller
             'prix' => $request->input('prix'),
             'stock' => $request->input('stock')
         ]);
-        return view('articles.modifier',['article'=>$article])->with('message','Modificatins effectuées');
+        return view('articles.modifier', ['article' => $article])->with('message', 'Modificatins effectuées');
     }
 
+    // ___________________________________________________________________________
     /**
      * Remove the specified resource from storage.
      *
