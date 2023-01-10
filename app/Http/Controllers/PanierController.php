@@ -35,6 +35,7 @@ class PanierController extends Controller
             'quantite' => $quantite,
 
         ];
+        
 
         $panier[$article->id] = $detail_article;
 

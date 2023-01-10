@@ -1,7 +1,29 @@
 @extends('layouts.app')
 
 @section('content')
+<script>
+function calcul(){
+    total_produit = document.getElementById('total-produit').innerHTML; 
+    document.getElementById('frais-livraison').innerHTML =total_produit;
+    var e = document.getElementById("livraison");
+    var livraison = e.value;
+    document.getElementById('frais-livraison').innerHTML= livraison;
+    var total_general = +total_produit + +livraison;
+
+   document.getElementById('total-general').innerHTML = total_general;
+   document.getElementById('total').value = total_general;
+
+   if (total_produit!=0){
+    document.getElementById('valider').style.visibility = 'visible';
+   } else {
+    document.getElementById('valider').style.visibility = 'hidden';
+   }
+
+}
+</script>
     <div class="container">
+          <!-- Initialisation du total général à 0 -->
+        @php $total = 0 @endphp
 
         @if (session()->has('panier'))
             <h1>Mon panier</h1>
@@ -18,8 +40,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <!-- Initialisation du total général à 0 -->
-                        @php $total = 0 @endphp
+                      
 
 
 
@@ -60,8 +81,29 @@
                             <td colspan="4">Total Produits:</td>
                             <td colspan="2">
                                 <!-- On affiche total général -->
-								@php session()->put('total', $total) @endphp
-                                <strong>{{ $total }} €</strong>
+							
+                                <strong id="total-produit">{{ $total }}</strong><strong>€</strong>
+            
+                            </td>
+                        </tr>
+
+                        <tr colspan="2">
+                            <td colspan="4">Frais de livraison:</td>
+                            <td colspan="2">
+                                <!-- frais de livraison -->
+						
+                
+                                <strong id="frais-livraison">0</strong><strong>€</strong>
+                            </td>
+                        </tr>
+
+                        <tr colspan="2">
+                            <td colspan="4">Total Général:</td>
+                            <td colspan="2">
+                                <!-- On affiche total général -->
+								{{-- @php session()->put('total', $total) @endphp --}}
+                           
+                                <strong id="total-general">{{ $total }}</strong><strong>€</strong>
                             </td>
                         </tr>
 
@@ -74,6 +116,42 @@
             <!-- Lien pour vider le panier -->
             <a class="btn btn-danger" href="{{ route('panier.vider') }}" title="Retirer tous les produits du panier">Vider
                 le panier</a>
+
+
+                @auth
+                <form method="post" action="{{ route('commande.store') }}">
+                    @csrf
+    
+                    <input id="total" type="hidden" name="total" value="{{ $total }}">
+
+                    @if (count($user->adresses)>0)
+                    <select name="adresse" class="form-control mt-2">
+    
+                       <option selected disabled>Sélectionnez...</option>
+                        @foreach ($user->adresses as $adresse)
+                            <option value="{{ $adresse['id'] }}">{{ $adresse['rue'] }}, {{ $adresse['code_postal']}}, {{$adresse['commune']}}</option>
+                        @endforeach
+    
+                    </select>
+                    <select name="livraison" required class="form-control mt-2" id="livraison" onchange="calcul()"">
+                        <option selected disabled value="0">Sélectionnez...</option>
+                        <option value="10">Livraison à domicile 10€</option>
+                        <option value="5">Livraison dans un point relais 5€</option>
+                        <option value="15">Livraison expresse 15€</option>
+                    </select>
+                    <button id="valider" class="btn btn-success mt-2" type="submit" style="visibility:hidden;">Valider</button>
+                </form>
+
+                    @else
+                    <div class="alert alert-danger">Veuillez renseigner au moins une adresse de livraison</div>
+                    @endif
+   
+
+    
+    
+            @endauth
+    
+
         @else
             <div class="alert alert-info">Aucun produit au panier</div>
         @endif
@@ -81,31 +159,6 @@
         @guest
             <div class="alert alert-info">Pour continuer, Connectez vous</div>
         @endguest
-
-        @auth
-            <form method="post" action="{{ route('commande.store') }}">
-                @csrf
-
-                <input type="hidden" name="total" value="{{ $total }}">
-                <select name="adresse" class="form-control mt-2">
-
-                   <option selected disabled>Sélectionnez...</option>
-                    @foreach ($user->adresses as $adresse)
-					@if (count($adresse)!==0)
-                        <option value="{{ $adresse['id'] }}">{{ $adresse['rue'] }}</option>
-					@endif
-                    @endforeach
-
-                </select>
-			
-                <select name="livraison" class="form-control mt-2">
-                    <option selected="selected" value="10">Livraison à domicile 10€</option>
-                    <option value="5">Livraison dans un point relais 5€</option>
-                    <option value="15">Livraison expresse 15€</option>
-                </select>
-                <button class="btn btn-success mt-2" type="submit">Valider</button>
-            </form>
-        @endauth
 
 
     </div>

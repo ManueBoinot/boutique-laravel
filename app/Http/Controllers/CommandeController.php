@@ -26,11 +26,15 @@ class CommandeController extends Controller
     public function store(Request $request)
     {
 
+        $request->validate([
+            'adresse' => 'required'
+        ]);
+
         $user = Auth::user();
         $commande = new Commande();
         $commande->numero = rand(10000, 99999);
         $commande->adresse_id = $request->input('adresse');
-        $commande->prix = session()->get('total') + $request->input('livraison');
+        $commande->prix = $request->input('total');
         $commande->user_id = $user->id;
         $commande->save();
 

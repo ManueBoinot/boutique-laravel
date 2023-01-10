@@ -77,9 +77,3 @@ class ArticleCampagneSeeder extends Seeder
     }
 }
 
-        DB::table('article_campagnes')->insert([
-            'article_id' => 12,
-            'campagne_id' => 3,
-        ]);
-    }
-}

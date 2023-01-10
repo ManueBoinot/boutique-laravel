@@ -13,6 +13,9 @@ class Article extends Model
         'nom',
         'description',
         'prix',
+        'gamme_id',
+        'image',
+        'note_moyenne',
         'stock',
         
     ];
@@ -26,7 +29,7 @@ class Article extends Model
     // Fonction qui précise la relation avec la table "Commandes"
     public function commandes()
     {
-        return $this->belongsToMany(Commande::class, 'article_commandes')->withPivot('quantite');
+        return $this->belongsToMany(Commande::class, 'articles_commandes')->withPivot('quantite');
     }
 
     // Fonction qui précise la relation avec la table "Campagnes"

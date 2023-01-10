@@ -19,12 +19,14 @@ use App\Http\Controllers\CampagneController;
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('boutique.home');
+Route::get('/admin', [App\Http\Controllers\AdminController::class, 'index'])->name('admin.index');
 
 // PANIER -----------------------
 Route::get('panier', [App\Http\Controllers\PanierController::class, 'afficher'])->name('panier.afficher');
 Route::post('panier.ajouter/{article}', [App\Http\Controllers\PanierController::class, 'ajouter'])->name('panier.ajouter');
 Route::get('panier.supprimer/{article}', [App\Http\Controllers\PanierController::class, 'supprimer'])->name('panier.supprimer');
 Route::get('panier.vider', [App\Http\Controllers\PanierController::class, 'vider'])->name('panier.vider');
+
 
 // USER -----------------------------------
 Route::put('/user/modif-password/{user}', [App\Http\Controllers\UserController::class, 'updatePassword'])->name('updatePassword');
