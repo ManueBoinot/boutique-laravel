@@ -103,7 +103,7 @@
                                     <input type="hidden" name="articleId" value="{{ $article->id }}">
                                     <button type="submit" class="btn btn-success m-2">Ajouter aux favoris</button>
                                 </form>
-
+                            @endif
                         </div>
                     </div>
                 </div>

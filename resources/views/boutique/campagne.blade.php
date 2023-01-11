@@ -59,7 +59,7 @@
                                                 style="border: 1px solid rgb(255,225,64)">
                                                 <p class="m-0"
                                                     style="background: rgb(255,225,64);
-                                        background: radial-gradient(circle, rgba(252,235,145,1) 0%, rgba(255,225,64,1) 100%); color: black;">
+                                                    background: radial-gradient(circle, rgba(252,235,145,1) 0%, rgba(255,225,64,1) 100%); color: black;">
                                                     PROMO {{ $campagne->nom }}</p>
 
                                                 @php $prixPromo = $article->prix - ($article->prix * $campagne->reduction / 100)@endphp
@@ -107,6 +107,7 @@
                                                         <button type="submit" class="btn btn-success m-2">Ajouter aux
                                                             favoris</button>
                                                     </form>
+                                                @endif
                                             </div>
 
                                         </div>
@@ -118,6 +119,5 @@
                 </div>
             </div>
         @endforeach
-
     </div>
 @endsection

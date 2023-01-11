@@ -15,9 +15,7 @@ class CampagneController extends Controller
      */
     public function index()
     {
-        $campagnes = Campagne::all()
-            ->whereDate('date_debut', '<=', date('Y-m-d'))
-            ->whereDate('date_fin', '>=', date('Y-m-d'))
+        $campagnes = Campagne::whereDate('date_fin', '>=', date('Y-m-d'))
             ->get();
 
         return view('boutique.campagne', ['campagnes' => $campagnes]);

@@ -78,7 +78,7 @@ class CommandeController extends Controller
     }
 
 
-     * @param  int  $id
+     /* @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
