@@ -115,4 +115,31 @@
             </tr>
         @endforeach
     </table>
+
+    <h2>Utilisateurs :</h2>
+    <table class="table bg-light table-striped">
+        <tr>
+            <th>ID</th>
+            <th>Nom</th>
+            <th>Prénom</th>
+            <th>E-mail</th>
+            <th>Rôle</th>
+            <th>Supprimer</th>
+        </tr>
+        @foreach ($users as $user)
+            <tr>
+                <td>{{ $user['id'] }}</td>
+                <td>{{ $user['nom'] }}</td>
+                <td>{{ $user['prenom'] }}</td>
+                <td>{{ $user['email'] }}</td>
+                <td>{{ $user->role->role }}</td>
+                <td><form method="post" action="{{ route('users.destroy', $user) }}">
+                    @method('delete')
+                    @csrf
+                    <input type="hidden" name="user" value="{{ $user['id'] }}">
+                    <button class="btn btn-danger">Supprimer</button>
+                </form></td>
+            </tr>
+        @endforeach
+    </table>
 @endsection
