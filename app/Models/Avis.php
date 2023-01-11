@@ -9,6 +9,14 @@ class Avis extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'texte',
+        'note',
+        'user_id',
+        'article_id'
+
+    ];
+
     // Fonction qui précise la relation avec la table "Users"
     public function user()
     {

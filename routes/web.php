@@ -38,3 +38,4 @@ Route::resource('/commande', App\Http\Controllers\CommandeController::class)->ex
 Route::resource('/articles', App\Http\Controllers\ArticleController::class);
 Route::resource('/gammes', App\Http\Controllers\GammeController::class);
 Route::resource('/users', App\Http\Controllers\UserController::class)->except('index', 'create', 'store');
+Route::resource('/avis', App\Http\Controllers\AvisController::class)->except('index','create');

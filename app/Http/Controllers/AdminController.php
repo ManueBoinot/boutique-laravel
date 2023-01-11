@@ -10,8 +10,8 @@ class AdminController extends Controller
 {
    public function index(){
 
-      $articles = Article::get();
-      $gammes = Gamme::get();
+      $articles = Article::all();
+      $gammes = Gamme::all();
       return view('admin.index',['articles' => $articles, 'gammes'=>$gammes]);
     
    }

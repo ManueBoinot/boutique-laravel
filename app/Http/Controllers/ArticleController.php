@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Avis;
 use App\Models\Gamme;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Article;
 
@@ -15,8 +17,8 @@ class ArticleController extends Controller
      */
     public function index()
     {
-    $articles = Article::orderBy('nom')->get();
-    return view('articles.index',['articles'=>$articles]);
+        $articles = Article::orderBy('nom')->get();
+        return view('articles.index', ['articles' => $articles]);
     }
 
     /**
@@ -37,22 +39,22 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-       $request->validate([
-        'nom'=>'required | min:3 | max:40',
-        'description'=>'required | min:3 | max:255',
-        'gamme_id'=>'required | min:1 | max:25',
-        'prix'=>'required | min:1 | max:10',
-        'stock'=>'required | min:1 | max:10'
-       ]);
+        $request->validate([
+            'nom' => 'required | min:3 | max:40',
+            'description' => 'required | min:3 | max:255',
+            'gamme_id' => 'required | min:1 | max:25',
+            'prix' => 'required | min:1 | max:10',
+            'stock' => 'required | min:1 | max:10'
+        ]);
 
-       Article::create([
-        'nom'=> $request->input('nom'),
-        'description'=>$request->input('description'),
-        'gamme_id'=>$request->input('gamme_id'),
-        'image' => isset($request['image']) ? uploadImage($request['image']) :  "image.jpg",      
-        'prix'=>$request->input('prix'),
-        'stock'=>$request->input('stock')
-       ]);
+        Article::create([
+            'nom' => $request->input('nom'),
+            'description' => $request->input('description'),
+            'gamme_id' => $request->input('gamme_id'),
+            'image' => isset($request['image']) ? uploadImage($request['image']) : "image.jpg",
+            'prix' => $request->input('prix'),
+            'stock' => $request->input('stock')
+        ]);
 
         return redirect()->route('admin.index')->with('message', 'Produit ajouté');
     }
@@ -65,6 +67,8 @@ class ArticleController extends Controller
      */
     public function show(Article $article)
     {
+        $article->load('avis');
+
         return view('boutique.article', ['article' => $article]);
     }
 
@@ -77,7 +81,7 @@ class ArticleController extends Controller
     public function edit(Article $article, Gamme $gammes)
     {
         $gammes = Gamme::get();
-        return view('articles.modifier',['article'=>$article,'gammes'=>$gammes]);
+        return view('articles.modifier', ['article' => $article, 'gammes' => $gammes]);
     }
 
     /**
@@ -90,24 +94,24 @@ class ArticleController extends Controller
     public function update(Request $request, Article $article)
     {
         $request->validate([
-            'nom'=>'required | min:3 | max:40',
-            'description'=>'required | min:3 | max:255',
-            'gamme_id'=>'required | min:1 | max:25',
-            'prix'=>'required | min:1 | max:10',
-            'stock'=>'required | min:1 | max:10'
+            'nom' => 'required | min:3 | max:40',
+            'description' => 'required | min:3 | max:255',
+            'gamme_id' => 'required | min:1 | max:25',
+            'prix' => 'required | min:1 | max:10',
+            'stock' => 'required | min:1 | max:10'
 
         ]);
 
         $article->update([
-            'nom'=> $request->input('nom'),
-            'description'=>$request->input('description'),
-            'gamme_id'=>$request->input('gamme_id'),
-            'image' => isset($request['image']) ? uploadImage($request['image']) :  "image.jpg",      
-            'prix'=>$request->input('prix'),
-            'stock'=>$request->input('stock')
+            'nom' => $request->input('nom'),
+            'description' => $request->input('description'),
+            'gamme_id' => $request->input('gamme_id'),
+            'image' => isset($request['image']) ? uploadImage($request['image']) : "image.jpg",
+            'prix' => $request->input('prix'),
+            'stock' => $request->input('stock')
         ]);
-        
-        return redirect()->route('admin.index')->with('message','Modificatins effectuées');
+
+        return redirect()->route('admin.index')->with('message', 'Modificatins effectuées');
     }
 
     /**
@@ -118,8 +122,8 @@ class ArticleController extends Controller
      */
     public function destroy($id)
     {
-        $article = Article::where('id', $id)->first();
+        $article = Article::find($id);
         $article->delete();
-        return redirect()->route('admin.index')->with('message','Article supprimé');
+        return redirect()->route('admin.index')->with('message', 'Article supprimé');
     }
 }

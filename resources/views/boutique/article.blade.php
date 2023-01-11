@@ -57,7 +57,6 @@
                                             class="fa-solid fa-cart-plus fs-3"></i></button>
                                 </form>
                             </div>
-
                         @else
                             {{-- PRIX ARTICLE HORS PROMO --------------------------- --}}
                             <p class="card-text m-0"><span class="fs-3">{{ $article->prix }} €</span> (boîte de
@@ -74,6 +73,63 @@
                                         class="fa-solid fa-cart-plus fs-3"></i></button>
                             </form>
                         @endif
+                    </div>
+                    {{-- Avis clients --}}
+                    <div class="card-text rounded mb-3" style="border: 1px solid rgb(255,225,64)">
+                        <p class="m-0 fs-4"
+                            style="background: rgb(255,225,64);
+                        background: radial-gradient(circle, rgba(252,235,145,1) 0%, rgba(255,225,64,1) 100%); color: black;">
+                            Avis clients
+
+                        <h3>Commentaires</h3>
+                        @foreach ($article->avis as $avis)
+                          
+                                <div class="text-start fs-4"><i class="fa-solid fa-quote-left"></i>
+                                    {{ $avis['texte'] }} <i class="fa-solid fa-quote-right"></i>
+                                    <i>{{ $avis->user['nom'] }}</i> Note: {{ $avis['note'] }}</div>
+
+                                @auth
+
+                                    @if (Auth::user()->role_id == '2')
+                                        <form method="post" action="{{ route('avis.destroy', $avis) }}">
+                                            @method('delete')
+                                            @csrf
+                                            <input type="hidden" name="article_id" value="{{ $avis['article_id'] }}">
+                                            <button class="btn btn-danger mt-2 mb-2" type="submit">Supprimer le commentaire</button>
+                                        </form>
+
+                                    @endif
+
+
+                                @endauth
+                    
+                        @endforeach
+
+                        @auth
+
+                            <form method="post" action="{{ route('avis.store') }}">
+                                @csrf
+                                <label class="label-control">
+                                    Commentaire:
+                                </label>
+                                <input class="form-control w-75 mx-auto" name="texte">
+                                <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                                <input type="hidden" name="article_id" value="{{ $article['id'] }}">
+                                <label class="label-control">Note:</label>
+                                <select name="note" class="form-control w-25 mx-auto">
+                                    <option disabled selected value="">Sélectionnez...</option>
+                                    <option value="5"> 5 </option>
+                                    <option value="4"> 4 </option>
+                                    <option value="3"> 3 </option>
+                                    <option value="2"> 2 </option>
+                                    <option value="1"> 1 </option>
+                                </select>
+                                <button class="btn btn-primary mt-2 mb-2">Poster le commentaire</button>
+                            </form>
+                        @endauth
+                        @guest
+                            <div class="alert alert-warning">Vous devez être connecté pour pouvoir poster un avis</div>
+                        @endguest
                     </div>
                 </div>
             </div>
