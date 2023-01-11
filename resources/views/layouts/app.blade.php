@@ -77,7 +77,7 @@
                                     <i class="fa-regular fa-user" style="color: rgb(255,225,64)"></i>
                                 </a>
                                 <ul class="dropdown-menu text-bg-dark">
-                                    <li><a class="dropdown-item text-light fs-3" href="#">Mes favoris</a></li>
+                                    <li><a class="dropdown-item text-light fs-3" href="{{ route('favoris.index', Auth::user())}}">Mes favoris</a></li>
                                     <li><a class="dropdown-item text-light fs-3"
                                             href="{{ route('commande.index', Auth::user()) }}">Mes commandes</a></li>
                                     <li><a class="dropdown-item text-light fs-3"
