@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Article;
 
+
 class ArticleController extends Controller
 {
     /**
@@ -48,7 +49,24 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        
+        $request->validate([
+            'nom' => 'required | min:3 | max:40',
+            'description' => 'required | min:3 | max:255',
+            'gamme_id' => 'required | min:1 | max:25',
+            'prix' => 'required | min:1 | max:10',
+            'stock' => 'required | min:1 | max:10'
+        ]);
+
+        Article::create([
+            'nom' => $request->input('nom'),
+            'description' => $request->input('description'),
+            'gamme_id' => $request->input('gamme_id'),
+            'image' => isset($request['image']) ? uploadImage($request['image']) : "image.jpg",
+            'prix' => $request->input('prix'),
+            'stock' => $request->input('stock')
+        ]);
+
+        return redirect()->route('admin.index')->with('message', 'Produit ajouté'); 
     }
 
     // ___________________________________________________________________________

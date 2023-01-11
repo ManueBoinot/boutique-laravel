@@ -14,6 +14,9 @@ class Article extends Model
         'description',
         'prix',
         'stock',
+        'gamme_id',
+        'image',
+        'note_moyenne'
         
     ];
 

@@ -38,7 +38,8 @@
         },
         "files": [
             "app/Helpers/todayPromo.php",
-            "app/Helpers/ifPromo.php"
+            "app/Helpers/ifPromo.php",
+            "app/Helpers/uploadImage.php"
         ]
     },
     "scripts": {

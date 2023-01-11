@@ -43,6 +43,7 @@
             </div>
 
             @foreach ($user->adresses as $adresse)
+            <h1>{{ $loop->iteration }}</h1>
                 <div class="col-12 col-lg-5 mx-auto text-start border text-bg-light rounded">
                     <div class="row p-4">
                         <div class="col-4" style="color: #bea207">
