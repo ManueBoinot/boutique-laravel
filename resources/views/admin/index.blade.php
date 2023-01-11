@@ -75,4 +75,44 @@
             </tr>
         @endforeach
     </table>
+
+    <h2 class="text-light">Création d'une gamme :</h2>
+    <div class="card text-black">
+        <form method="post" action="{{ route('gammes.store') }}">
+            @csrf
+            <label class="form-label">Nom:</label>
+            <input class="form-control" name="gamme" required>
+            <button type="submit" class="btn btn-primary">Enregistrer</button>
+        </form>
+    </div>
+
+    <h2>Gammes :</h2>
+    <table class="table bg-light table-striped">
+        <tr>
+            <th>Nom de la gamme</th>
+            <th>Modifier</th>
+            <th>Supprimer</th>
+        </tr>
+        @foreach ($gammes as $gamme)
+            <tr>
+                <td>{{ $gamme['gamme'] }} </td>
+                <td>
+                    <form method="post" action="{{ route('gammes.edit', $gamme) }}">
+                        @method('get')
+                        @csrf
+                        <input type="hidden" name="gamme" value="{{ $gamme['id'] }}">
+                        <button class="btn btn-primary">Modifier</button>
+                    </form>
+                </td>
+                <td>
+                    <form method="post" action="{{ route('gammes.destroy', $gamme) }}">
+                        @method('delete')
+                        @csrf
+                        <input type="hidden" name="gamme" value="{{ $gamme['id'] }}">
+                        <button class="btn btn-danger">Supprimer</button>
+                    </form>
+                </td>
+            </tr>
+        @endforeach
+    </table>
 @endsection
