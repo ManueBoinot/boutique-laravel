@@ -133,7 +133,7 @@
         {{-- BANDEAU PROMOTION SI PROMO EN COURS ------------------------------------------ --}}
         
         @php $routeName = Request::route()->getName() @endphp
-        @if ($routeName != 'admin')
+        @if ($routeName != 'admin.index')
             <div class="container-fluid" id="bandeau-promo">
                 @php $promo = todayPromo() @endphp
                 @include('boutique.bandeau-promo')

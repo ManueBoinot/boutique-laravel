@@ -1,4 +1,4 @@
-<div>
+<div class="my-3">
     <div class="accordion" id="accordionPanelsStayOpenExample">
         {{-- ___________________________________________________________________________________________________________ --}}
         {{-- 1 - CRÉATION DE CAMPAGNE --}}
@@ -80,7 +80,7 @@
         </div>
 
         {{-- ___________________________________________________________________________________________________________ --}}
-        {{-- 2 - GESTION DES CAMPAGNES --}}
+        {{-- 2 - GESTION DES CAMPAGNES EXISTANTES --}}
         <div class="accordion-item text-bg-dark">
             <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
                 <button class="accordion-button collapsed text-bg-info fs-3" type="button" data-bs-toggle="collapse"
@@ -96,7 +96,7 @@
                 <div class="accordion-body">
                     {{-- Accordéon interne liste des campagnes ---------------------------------------------- --}}
                     @foreach ($campagnes as $campagne)
-                        <div class="accordion accordion-flush" id="accordionFlushExample">
+                        <div class="accordion accordion-flush border" id="accordionFlushExample">
                             <div class="accordion-item">
 
                                 {{-- HEADER accordéon liste des campagnes --}}
