@@ -118,7 +118,7 @@ class ArticleController extends Controller
             'prix' => $request->input('prix'),
             'stock' => $request->input('stock')
         ]);
-        return view('articles.modifier', ['article' => $article])->with('message', 'Modificatins effectuées');
+        return view('articles.modifier', ['article' => $article])->with('message', 'Modifications effectuées');
     }
 
     // ___________________________________________________________________________

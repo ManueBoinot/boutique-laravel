@@ -72,7 +72,8 @@
                             {{-- Liens USER --------------------- --}}
                             <li class="nav-item dropdown px-4">
                                 <a class="nav-link dropdown-toggle fs-3" href="#" role="button"
-                                    data-bs-toggle="dropdown" aria-expanded="false" style="color: rgb(255,225,64)" title="Espace client">
+                                    data-bs-toggle="dropdown" aria-expanded="false" style="color: rgb(255,225,64)"
+                                    title="Espace client">
                                     <i class="fa-regular fa-user"></i>
                                 </a>
                                 <ul class="dropdown-menu text-bg-dark">
@@ -102,8 +103,8 @@
                             {{-- Lien ADMIN vers BACK OFFICE --------------------- --}}
                             @if (Auth::user()->isAdmin())
                                 <li class="nav-item px-4">
-                                    <a class="nav-link fs-3 text-danger border border-danger rounded" href="/admin" title="Back-office"><i
-                                            class="fa-solid fa-lock p-2"></i></a>
+                                    <a class="nav-link fs-3 text-danger border border-danger rounded" href="/admin"
+                                        title="Back-office"><i class="fa-solid fa-lock p-2"></i></a>
                                 </li>
                             @endif
                         @else
@@ -130,10 +131,15 @@
         </nav>
 
         {{-- BANDEAU PROMOTION SI PROMO EN COURS ------------------------------------------ --}}
-        <div class="container-fluid" id="bandeau-promo">
-            @php $promo = todayPromo() @endphp
-            @include('boutique.bandeau-promo')
-        </div>
+        
+        @php $routeName = Request::route()->getName() @endphp
+        @if ($routeName != 'admin')
+            <div class="container-fluid" id="bandeau-promo">
+                @php $promo = todayPromo() @endphp
+                @include('boutique.bandeau-promo')
+            </div>
+        @endif
+
     </div>
 
 

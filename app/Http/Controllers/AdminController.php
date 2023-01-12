@@ -22,7 +22,7 @@ class AdminController extends Controller
 
         $articles = Article::get();
         $gammes = Gamme::get();
-        $campagnes = Campagne::get();
+        $campagnes = Campagne::with('articles')->get();
         return view('admin.index', ['articles' => $articles, 'gammes' => $gammes, 'campagnes' => $campagnes]);
     }
 }

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Campagne;
+use App\Models\Article;
+use Illuminate\Support\Facades\DB;
 
 class CampagneController extends Controller
 {
@@ -46,7 +48,6 @@ class CampagneController extends Controller
             }
         }
 
-
         return redirect()->route('admin.index')->with('message', 'Nouvelle campagne ' . $request->nom . ' créée');
     }
 
@@ -59,7 +60,10 @@ class CampagneController extends Controller
      */
     public function edit(Campagne $campagne)
     {
-        return view('admin.modifier-campagnes', ['campagne' => $campagne]);
+        $campagneArticlesIds = DB::table('article_campagnes')->where('campagne_id', '=', $campagne->id)->get('article_id');
+        $articles = Article::all();
+
+        return view('admin.campagne-modifier', ['campagne' => $campagne, 'articles' => $articles, 'campagneArticlesIds' => $campagneArticlesIds]);
     }
 
     // ___________________________________________________________________________
@@ -73,19 +77,39 @@ class CampagneController extends Controller
     public function update(Request $request, Campagne $campagne)
     {
         $request->validate([
-            'nom' => 'min:3| max:25',
-            'date_debut' => 'date | after_or_equal:today',
-            'date_fin' => 'date | after:date_debut',
-            'reduction' => 'min:1| max:100',
-
+            'nom' => 'required | min:3 | max:25',
+            'date_debut' => 'required | date',
+            'date_fin' => 'required | date',
+            'reduction' => 'required | min:1 | max:100 ',
         ]);
 
-        $campagne->update([
-            'nom' => $request->input('nom'),
-            'date_debut' => $request->input('date_debut'),
-            'date_fin' => $request->input('date_fin'),
-            'reduction' => $request->input('reduction')
-        ]);
-        return view('admin.index', ['campagne' => $campagne])->with('message', 'Modification effectuée');
+        $campagne->update($request->all());
+
+        $campagne->load('articles');
+
+        foreach ($campagne->articles as $article) {
+            $campagne->articles()->detach($article);
+        }
+
+        foreach ($request->request as $key => $value) {
+            if (str_starts_with($key, 'article')) {
+                $campagne->articles()->attach([$value]);
+            }
+        }
+        return redirect()->route('admin.index')->with('message', 'Campagne " ' . $request->nom . ' " mise à jour avec succès');
+    }
+
+    // ___________________________________________________________________________
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Campagne $campagne)
+    {
+        $campagne->delete();
+
+        return redirect()->route('admin.index')->with('message', 'La campagne a bien été supprimée');
     }
 }
