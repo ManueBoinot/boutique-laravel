@@ -45,6 +45,7 @@
             @foreach ($user->adresses as $adresse)
                 <div class="col-12 col-lg-5 mx-auto text-start border text-bg-light rounded">
                     <div class="row p-4">
+                        <h5 class="text-center py-2 fw-bold border-bottom">ADRESSE N°{{ $loop->iteration }}</h5>
                         <div class="col-4" style="color: #bea207">
                             <p>RUE</p>
                             <p>CODE POSTAL</p>
@@ -212,7 +213,7 @@
         </div>
 
         {{-- AJOUT ET MODIF ADRESSES -------------------------- --}}
-        <div class="col-12 col-lg-6 border rounded">
+        <div class="col-12 col-lg-6 border rounded text-bg-dark px-5 py-3">
 
             {{-- AJOUT ADRESSE -------------------------- --}}
             @if (count($user->adresses) < 2)
@@ -281,13 +282,15 @@
             @endif
 
             {{-- Modif adresses ------------------------------------ --}}
-            <div class="row py-3 mx-auto my-2 border-bottom">
+            <div class="row py-3 mx-auto">
+
                 <div class="row mx-auto">
-                    <h3 class="text-center p-3">MODIFIER MES ADRESSES</h3>
+                <h3 class="text-center">MODIFIER MES ADRESSES</h3>
                 </div>
 
                 @foreach ($user->adresses as $adresse)
-                    <div class="row">
+                    <div class="row border rounded mx-auto mb-2 text-bg-light">
+                        <h5 class="text-center py-2 fw-bold border-bottom">ADRESSE N°{{ $loop->iteration }}</h5>
                         <form method="POST" action="{{ route('adresses.update', $adresse) }}">
                             @csrf @method('put')
 

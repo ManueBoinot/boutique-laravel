@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Article;
 
+
 class ArticleController extends Controller
 {
     /**
@@ -22,6 +23,17 @@ class ArticleController extends Controller
     }
 
     /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function popularite()
+    {
+        $articles = Article::orderBy('note_moyenne', 'desc')->get();
+        return view('boutique.populaires', ['articles' => $articles]);
+    }
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
@@ -31,6 +43,7 @@ class ArticleController extends Controller
         //
     }
 
+    // ___________________________________________________________________________
     /**
      * Store a newly created resource in storage.
      *
@@ -59,6 +72,7 @@ class ArticleController extends Controller
         return redirect()->route('admin.index')->with('message', 'Produit ajouté');
     }
 
+    // ___________________________________________________________________________
     /**
      * Display the specified resource.
      *
@@ -72,6 +86,7 @@ class ArticleController extends Controller
         return view('boutique.article', ['article' => $article]);
     }
 
+    // ___________________________________________________________________________
     /**
      * Show the form for editing the specified resource.
      *
@@ -84,6 +99,7 @@ class ArticleController extends Controller
         return view('articles.modifier', ['article' => $article, 'gammes' => $gammes]);
     }
 
+    // ___________________________________________________________________________
     /**
      * Update the specified resource in storage.
      *
@@ -111,9 +127,10 @@ class ArticleController extends Controller
             'stock' => $request->input('stock')
         ]);
 
-        return redirect()->route('admin.index')->with('message', 'Modificatins effectuées');
+        return redirect()->route('admin.index')->with('message', 'Modifications effectuées');
     }
 
+    // ___________________________________________________________________________
     /**
      * Remove the specified resource from storage.
      *

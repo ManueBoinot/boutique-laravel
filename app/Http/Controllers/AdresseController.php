@@ -33,6 +33,7 @@ class AdresseController extends Controller
         return redirect()->route('users.show', Auth::user())->with('message', 'Adresse ajoutée');
     }
 
+    // ___________________________________________________________________________
     /**
      * Show the form for editing the specified resource.
      *
@@ -43,6 +44,7 @@ class AdresseController extends Controller
     {
     }
 
+    // ___________________________________________________________________________
     /**
      * Update the specified resource in storage.
      *
@@ -69,6 +71,7 @@ class AdresseController extends Controller
         return view('users.moncompte', ['user' => Auth::user()])->with('message', 'Modifications effectuées');
     }
 
+    // ___________________________________________________________________________
     /**
      * Remove the specified resource from storage.
      *

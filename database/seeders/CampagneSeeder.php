@@ -37,8 +37,4 @@ class CampagneSeeder extends Seeder
             'reduction' => 15,
         ]);
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> Tony

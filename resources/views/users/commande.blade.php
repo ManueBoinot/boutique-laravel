@@ -16,10 +16,10 @@
                 @foreach ($user->commandes as $commande)
                     <tr>
                         <td>{{ $commande->numero }}</td>
-                        <td>{{ $commande->created_at }}</td>
-                        <td>{{ $commande->prix }} €</td>
+                        <td>{{ date('d-m-Y', strtotime($commande->created_at)) }}</td>
+                        <td>{{ number_format($commande->prix, 2, ',') }} €</td>
                         <td><a href="{{ route('commande.show', $commande) }}">
-                                <button type="submit" class="btn btn-danger fs-5">
+                                <button type="submit" class="btn btn-outline-warning fs-5">
                                     {{ __('Détails') }}
                                 </button></a></td>
                     </tr>

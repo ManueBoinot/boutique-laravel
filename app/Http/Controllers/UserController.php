@@ -21,6 +21,14 @@ class UserController extends Controller
         return view('users/moncompte', ['user' => $user]);
     }
 
+    // ___________________________________________________________________________
+    // Affichage des infos utilisateur
+    public function profil(User $user)
+    {
+        return view('users.moncompte', ['user' => $user]);
+    }
+
+    // ___________________________________________________________________________
     /**
      * Show the form for editing the specified resource.
      *
@@ -32,6 +40,7 @@ class UserController extends Controller
         //
     }
 
+    // ___________________________________________________________________________
     /**
      * Update the specified resource in storage.
      *
@@ -56,7 +65,8 @@ class UserController extends Controller
 
         return redirect()->route('users.show', $user)->with('message', 'Modifications effectuées');
     }
-
+    
+    // ___________________________________________________________________________
     /**
      * Remove the specified resource from storage.
      *

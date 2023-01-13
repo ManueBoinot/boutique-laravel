@@ -16,33 +16,33 @@ class CommandeArticleSeeder extends Seeder
     public function run()
     {
         DB::table('article_commandes')->insert([
-            'commande_id'=>1,
-            'article_id'=>1,
-            'quantite'=>5,
+            'commande_id' => 1,
+            'article_id' => 1,
+            'quantite' => 5,
         ]);
 
         DB::table('article_commandes')->insert([
-            'commande_id'=>1,
-            'article_id'=>2,
-            'quantite'=>3,
+            'commande_id' => 1,
+            'article_id' => 2,
+            'quantite' => 3,
         ]);
 
         DB::table('article_commandes')->insert([
-            'commande_id'=>2,
-            'article_id'=>1,
-            'quantite'=>5,
+            'commande_id' => 2,
+            'article_id' => 1,
+            'quantite' => 5,
         ]);
 
         DB::table('article_commandes')->insert([
-            'commande_id'=>3,
-            'article_id'=>1,
-            'quantite'=>5,
+            'commande_id' => 3,
+            'article_id' => 1,
+            'quantite' => 5,
         ]);
 
         DB::table('article_commandes')->insert([
-            'commande_id'=>4,
-            'article_id'=>1,
-            'quantite'=>5,
+            'commande_id' => 4,
+            'article_id' => 1,
+            'quantite' => 5,
         ]);
     }
 }

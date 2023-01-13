@@ -20,6 +20,7 @@ class HomeController extends Controller
             session()->put('panier', []);
         }
 
+        // ___________________________________________________________________________
         // Fonction TOP PROMO --------------------------------------------------
         $promo = Campagne::with(['articles' => function ($query) {
             $query->limit(3);
@@ -35,10 +36,12 @@ class HomeController extends Controller
             $promo = null;
         }
 
+        // ___________________________________________________________________________
         // Pour affichage de 3 articles random si pas de promo en cours
-        
+
         $articles = Article::limit(3)->get();
 
+        // ___________________________________________________________________________
         // Fonction TOP RATED --------------------------------------------------
         $top_rated = Article::orderBy('note_moyenne', 'desc')
             ->limit(3)

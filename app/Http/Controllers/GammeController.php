@@ -18,6 +18,7 @@ class GammeController extends Controller
         return view('gammes.index', ['gammes' => $gammes]);
     }
 
+    // ___________________________________________________________________________
     /**
      * Show the form for creating a new resource.
      *
@@ -28,6 +29,7 @@ class GammeController extends Controller
         //
     }
 
+    // ___________________________________________________________________________
     /**
      * Store a newly created resource in storage.
      *
@@ -43,6 +45,7 @@ class GammeController extends Controller
         return back()->with('message', 'Gamme créée avec succès');
     }
 
+    // ___________________________________________________________________________
     /**
      * Display the specified resource.
      *
@@ -54,6 +57,7 @@ class GammeController extends Controller
         //
     }
 
+    // ___________________________________________________________________________
     /**
      * Show the form for editing the specified resource.
      *
@@ -65,6 +69,7 @@ class GammeController extends Controller
         return view('gammes.modif',['gamme'=>$gamme]);
     }
 
+    // ___________________________________________________________________________
     /**
      * Update the specified resource in storage.
      *
@@ -85,6 +90,7 @@ class GammeController extends Controller
         return redirect()->route('admin.index')->with('message', 'Modification de la gamme effectuée');
     }
 
+    // ___________________________________________________________________________
     /**
      * Remove the specified resource from storage.
      *

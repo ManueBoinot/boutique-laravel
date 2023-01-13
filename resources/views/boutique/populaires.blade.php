@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col mb-4">
                 <h1 style="font-family:Passions Conflict, serif; font-size: 4rem">Nos produits</h1>
-                <h2 class="fs-4 fst-italic">(par ordre alphabétique)</h2>
+                <h2 class="fs-4 fst-italic">(par popularité)</h2>
             </div>
         </div>
 
@@ -89,26 +89,6 @@
                                             <input type="hidden" name="article" value="{{ $article }}">
                                             <button class="btn btn-outline-warning"><i
                                                     class="fa-solid fa-cart-plus p-0 m-0"></i></button>
-                                        </form>
-                                    @endif
-
-                                    {{-- Bouton FAVORIS --}}
-
-                                    <!-- si l'article est dans les favoris -->
-
-                                    @if (Auth::user() && Auth::user()->isInFavorites($article))
-                                        <form method="post" action="{{ route('favoris.destroy') }}">
-                                            @csrf
-                                            @method('delete')
-                                            <input type="hidden" name="articleId" value="{{ $article->id }}">
-                                            <button type="submit" class="btn btn-danger m-2">Retirer des favoris</button>
-                                        </form>
-
-                                        <!-- si l'article n'est pas dans les favoris -->
-                                    @else
-                                        <form method="post" action="{{ route('favoris.store') }}"> @csrf
-                                            <input type="hidden" name="articleId" value="{{ $article->id }}">
-                                            <button type="submit" class="btn btn-success m-2">Ajouter aux favoris</button>
                                         </form>
                                     @endif
 

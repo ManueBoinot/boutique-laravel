@@ -7,6 +7,7 @@ use App\Models\Commande;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class CommandeController extends Controller
 {
@@ -23,18 +24,24 @@ class CommandeController extends Controller
         return view('users.commande', ['user' => $user]); // on retourne la vue pour afficher les commandes en y injectant le user
     }
 
+    /**
+     * 
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function store(Request $request)
     {
 
-        $request->validate([
-            'adresse' => 'required'
-        ]);
+
+        if (Gate::denies('validation_commande')) {
+            abort(403);
+        }
 
         $user = Auth::user();
         $commande = new Commande();
         $commande->numero = rand(10000, 99999);
         $commande->adresse_id = $request->input('adresse');
-        $commande->prix = $request->input('total');
+        $commande->prix = intval($request->input('total')) + intval($request->input('livraison'));
         $commande->user_id = $user->id;
         $commande->save();
 
@@ -50,9 +57,9 @@ class CommandeController extends Controller
         session()->forget("panier");
 
         return redirect()->route('home')->with('message', 'La commande a bien été validée');
-
     }
 
+    // ___________________________________________________________________________
     /**
      * Show the form for creating a new resource.
      *
@@ -64,14 +71,14 @@ class CommandeController extends Controller
     }
 
 
-<<<<<<< HEAD
+
     /** @param  \Illuminate\Http\Request  $request
-=======
-     /* @param  \Illuminate\Http\Request  $request
->>>>>>> Tony
      * @return \Illuminate\Http\Response
      */
 
+
+
+    // ___________________________________________________________________________
 
     /**
      * Display the specified resource.
@@ -83,15 +90,10 @@ class CommandeController extends Controller
     {
         $commande->load('articles');
         return view('users/detailscommande', ['commande' => $commande]);
-
     }
 
 
-<<<<<<< HEAD
-    /** @param  int  $id
-=======
      /* @param  int  $id
->>>>>>> Tony
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
