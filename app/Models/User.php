@@ -64,7 +64,7 @@ class User extends Authenticatable
     // Fonction qui précise la relation avec la table "Articles"
     public function favoris()
     {
-        return $this->belongsToMany(Articles::class, 'favoris');
+        return $this->belongsToMany(Article::class, 'favoris');
     }
 
     // Fonction qui précise la relation avec la table "Commandes"
@@ -76,5 +76,10 @@ class User extends Authenticatable
     public function isAdmin()
     {
         return $this->role_id === 2;
+    }
+
+    public function isInFavorites(Article $article)
+    {
+        return $article->users()->where('user_id', $this->id)->exists();
     }
 }

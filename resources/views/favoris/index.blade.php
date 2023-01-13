@@ -1,9 +1,12 @@
-{{-- AFFICHAGE DES 3 ARTICLES LES MIEUX NOTÉS --}}
-<div class="row justify-content-center text-center my-5 rounded p-3">
-    <h1 style="color: #ffed8a">NOS CHOCOLATS LES PLUS APPRÉCIÉS</h1>
+@extends('layouts.app')
 
-    @foreach ($top_rated as $article)
-        @php $campagne = ifPromo($article->id) @endphp
+@section('content')
+
+<div class="row justify-content-center text-center my-5 rounded p-3">
+    <h1 style="color: #ffed8a">MES CHOCOLATS FAVORIS</h1>
+
+    @foreach ($user->favoris as $article)
+        @php $campagne = ifPromo($article->id) @endphp 
         <div class="col-12 col-md-6 col-lg-4">
             <div class="text-bg-dark border-secondary card mb-3" style="max-width: 540px; box-shadow: 1px 1px 10px grey;">
                 <div class="row g-0">
@@ -55,25 +58,33 @@
                                         g)
                                     </p>
 
-
+                                    {{-- Bouton AJOUT AU PANIER --}}
+                                    <form method="post" action="{{ route('panier.ajouter', $article) }}">
+                                        @csrf
+                                        <input class="fs-5 text-end" type="number" name="quantite" value="1"
+                                            min="1" max="{{ $article['stock'] }}">
+                                        <input type="hidden" name="article" value="{{ $article }}">
+                                        <button class="btn btn-outline-warning"><i
+                                                class="fa-solid fa-cart-plus p-0 m-0"></i></button>
+                                    </form>
                                 </div>
+
                             @else
                                 {{-- PRIX ARTICLE HORS PROMO --------------------------- --}}
                                 <p class="card-text m-0"><span class="fs-3">{{ $article->prix }} €</span> (boîte de
                                     125 g)
                                 </p>
+
+                                {{-- Bouton AJOUT AU PANIER --}}
+                                <form method="post" action="{{ route('panier.ajouter', $article) }}">
+                                    @csrf
+                                    <input class="fs-5 text-end" type="number" name="quantite" value="1"
+                                        min="1" max="{{ $article['stock'] }}">
+                                    <input type="hidden" name="article" value="{{ $article }}">
+                                    <button class="btn btn-outline-warning"><i
+                                            class="fa-solid fa-cart-plus p-0 m-0"></i></button>
+                                </form>
                             @endif
-
-                            {{-- Bouton AJOUT AU PANIER --}}
-                            <form method="post" action="{{ route('panier.ajouter', $article) }}">
-                                @csrf
-                                <input class="fs-5 text-end" type="number" name="quantite" value="1"
-                                    min="1" max="{{ $article['stock'] }}">
-                                <input type="hidden" name="article" value="{{ $article }}">
-                                <button type="submit" class="btn btn-outline-warning"><i
-                                        class="fa-solid fa-cart-plus p-0 m-0"></i></button>
-                            </form>
-
                             {{-- Bouton FAVORIS --}}
 
                             <!-- si l'article est dans les favoris -->
@@ -99,4 +110,5 @@
             </div>
         </div>
     @endforeach
-</div>
+
+@endsection

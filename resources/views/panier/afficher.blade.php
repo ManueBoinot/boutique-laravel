@@ -163,4 +163,54 @@ function calcul(){
 
     </div>
 
+            <!-- Lien pour vider le panier -->
+            <a class="btn btn-danger" href="{{ route('panier.vider') }}" title="Retirer tous les produits du panier">Vider
+                le panier</a>
+
+
+                @auth
+                <form method="post" action="{{ route('commande.store') }}">
+                    @csrf
+    
+                    <input id="total" type="hidden" name="total" value="{{ $total }}">
+
+                    @if (count($user->adresses)>0)
+                    <select name="adresse" class="form-control mt-2">
+    
+                       <option selected disabled>Sélectionnez...</option>
+                        @foreach ($user->adresses as $adresse)
+                            <option value="{{ $adresse['id'] }}">{{ $adresse['rue'] }}, {{ $adresse['code_postal']}}, {{$adresse['commune']}}</option>
+                        @endforeach
+    
+                    </select>
+                    <select name="livraison" required class="form-control mt-2" id="livraison" onchange="calcul()"">
+                        <option selected disabled value="0">Sélectionnez...</option>
+                        <option value="10">Livraison à domicile 10€</option>
+                        <option value="5">Livraison dans un point relais 5€</option>
+                        <option value="15">Livraison expresse 15€</option>
+                    </select>
+                    <button id="valider" class="btn btn-success mt-2" type="submit" style="visibility:hidden;">Valider</button>
+                </form>
+
+                    @else
+                    <div class="alert alert-danger">Veuillez renseigner au moins une adresse de livraison</div>
+                    @endif
+   
+
+    
+    
+            @endauth
+    
+
+        @else
+            <div class="alert alert-info">Aucun produit au panier</div>
+        @endif
+
+        @guest
+            <div class="alert alert-info">Pour continuer, Connectez vous</div>
+        @endguest
+
+
+    </div>
+
 @endsection

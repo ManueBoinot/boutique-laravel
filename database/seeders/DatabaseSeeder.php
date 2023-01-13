@@ -25,7 +25,8 @@ class DatabaseSeeder extends Seeder
             ArticleCampagneSeeder::class,
             AvisSeeder::class,
             CommandeSeeder::class,
-            CommandeArticleSeeder::class
+            CommandeArticleSeeder::class,
+            FavorisSeeder::class
           ]);
     }
 }

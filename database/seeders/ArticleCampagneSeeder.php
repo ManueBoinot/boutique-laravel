@@ -76,4 +76,7 @@ class ArticleCampagneSeeder extends Seeder
         ]);
     }
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> Tony

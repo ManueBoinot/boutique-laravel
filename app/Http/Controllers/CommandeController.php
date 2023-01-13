@@ -64,7 +64,11 @@ class CommandeController extends Controller
     }
 
 
+<<<<<<< HEAD
     /** @param  \Illuminate\Http\Request  $request
+=======
+     /* @param  \Illuminate\Http\Request  $request
+>>>>>>> Tony
      * @return \Illuminate\Http\Response
      */
 
@@ -83,7 +87,11 @@ class CommandeController extends Controller
     }
 
 
+<<<<<<< HEAD
     /** @param  int  $id
+=======
+     /* @param  int  $id
+>>>>>>> Tony
      * @return \Illuminate\Http\Response
      */
     public function edit($id)

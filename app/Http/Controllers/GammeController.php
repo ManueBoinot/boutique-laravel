@@ -36,7 +36,11 @@ class GammeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'gamme' => ['required', 'string', 'max:191']
+        ]);
+        Gamme::create(['gamme' => $request->gamme]);
+        return back()->with('message', 'Gamme créée avec succès');
     }
 
     /**
@@ -56,9 +60,9 @@ class GammeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Gamme $gamme)
     {
-        //
+        return view('gammes.modif',['gamme'=>$gamme]);
     }
 
     /**
@@ -68,9 +72,17 @@ class GammeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Gamme $gamme)
     {
-        //
+        $request->validate([
+            'gamme' => ['required', 'string', 'max:191']
+        ]);
+
+        $gamme->update([
+            'gamme' => $request->input('gamme'),
+        ]);
+
+        return redirect()->route('admin.index')->with('message', 'Modification de la gamme effectuée');
     }
 
     /**
@@ -79,8 +91,9 @@ class GammeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Gamme $gamme)
     {
-        //
+        $gamme->delete();
+        return back()->with('message', 'Gamme supprimée');
     }
 }

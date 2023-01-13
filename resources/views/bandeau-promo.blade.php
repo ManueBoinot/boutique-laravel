@@ -12,4 +12,8 @@ background: radial-gradient(circle, rgba(252,235,145,1) 0%, rgba(255,225,64,1) 1
         <a href="/campagne" type="button" class="btn btn-warning fs-5 fw-bold">Voir la sélection</a>
 
     </div>
+<<<<<<< HEAD
 @endif
+=======
+@endif
+>>>>>>> Tony
