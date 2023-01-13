@@ -77,7 +77,8 @@
                                     <i class="fa-regular fa-user"></i>
                                 </a>
                                 <ul class="dropdown-menu text-bg-dark">
-                                    <li><a class="dropdown-item text-light fs-3" href="{{ route('favoris.index', Auth::user()) }}">Mes favoris</a></li>
+                                    <li><a class="dropdown-item text-light fs-3"
+                                            href="{{ route('favoris.index', Auth::user()) }}">Mes favoris</a></li>
                                     <li><a class="dropdown-item text-light fs-3"
                                             href="{{ route('commande.index', Auth::user()) }}">Mes commandes</a></li>
                                     <li><a class="dropdown-item text-light fs-3"
@@ -131,9 +132,9 @@
         </nav>
 
         {{-- BANDEAU PROMOTION SI PROMO EN COURS ------------------------------------------ --}}
-        
+
         {{-- @php $routeName = Request::route()->getName() @endphp --}}
-        @if ((Auth::user() && !Auth::user()->isAdmin()) || !Auth::user()) 
+        @if ((Auth::user() && !Auth::user()->isAdmin()) || !Auth::user())
             <div class="container-fluid" id="bandeau-promo">
                 @php $promo = todayPromo() @endphp
                 @include('boutique.bandeau-promo')
@@ -173,8 +174,9 @@
                         href="/articles">Nos produits</a></li>
                 <li class="text-white list-group-item text-bg-dark mx-auto"><a class="text-decoration-none text-light"
                         href="/campagne">Promotions</a></li>
-                <li class="text-white list-group-item text-bg-dark mx-auto"><a class="text-decoration-none text-light"
-                        href="{{ route('users.show', Auth::user()) }}">Espace client</a></li>
+                @auth<li class="text-white list-group-item text-bg-dark mx-auto"><a
+                            class="text-decoration-none text-light" href="{{ route('users.show', Auth::user()) }}">Espace
+                        client</a></li>@endauth
             </ul>
         </div>
 
