@@ -175,10 +175,6 @@
                         href="/campagne">Promotions</a></li>
                 <li class="text-white list-group-item text-bg-dark mx-auto"><a class="text-decoration-none text-light"
                         href="{{ route('users.show', Auth::user()) }}">Espace client</a></li>
-                <li class="text-white list-group-item text-bg-dark mx-auto"><a class="text-decoration-none text-light"
-                        href="/a-propos">À propos</a></li>
-                <li class="text-white list-group-item text-bg-dark mx-auto"><a class="text-decoration-none text-light"
-                        href="/contact">Contact</a></li>
             </ul>
         </div>
 
