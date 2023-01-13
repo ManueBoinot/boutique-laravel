@@ -49,16 +49,13 @@
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                         {{-- Lien vers ARTICLES --------------------- --}}
                         <li class="nav-item dropdown px-4">
-                            <a class="nav-link dropdown-toggle fs-3 text-light text-uppercase" role="button" data-bs-toggle="dropdown" aria-expanded="false">Produits</a>
+                            <a class="nav-link dropdown-toggle fs-3 text-light text-uppercase" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">Produits</a>
                             <ul class="dropdown-menu text-bg-dark">
                                 <li><a class="dropdown-item text-light fs-3" href="/articles">De A à Z</a></li>
                                 <li><a class="dropdown-item text-light fs-3" href="/gammes">Par gamme</a></li>
                                 <li><a class="dropdown-item text-light fs-3" href="/populaires">Populaires</a></li>
                             </ul>
-                        </li>
-                        {{-- Lien vers GAMMES --------------------- --}}
-                        <li class="nav-item px-4">
-                            <a class="nav-link fs-3 text-light text-uppercase" href="/gammes">Gammes</a>
                         </li>
                         {{-- Lien vers PROMOTIONS --------------------- --}}
                         <li class="nav-item px-4">
@@ -66,15 +63,18 @@
                         </li>
                         {{-- Lien vers PANIER --------------------- --}}
                         <li class="nav-item px-4">
-                            <a class="nav-link fs-3 text-light" href="/panier"><i
+                            <a class="nav-link fs-3 text-light" href="/panier" title="Panier"><i
                                     class="fa-solid fa-cart-shopping"></i></a>
                         </li>
+
                         {{-- Lien vers ESPACE CLIENT --------------------- --}}
                         @if (Auth::user())
+                            {{-- Liens USER --------------------- --}}
                             <li class="nav-item dropdown px-4">
                                 <a class="nav-link dropdown-toggle fs-3" href="#" role="button"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                    <i class="fa-regular fa-user" style="color: rgb(255,225,64)"></i>
+                                    data-bs-toggle="dropdown" aria-expanded="false" style="color: rgb(255,225,64)"
+                                    title="Espace client">
+                                    <i class="fa-regular fa-user"></i>
                                 </a>
                                 <ul class="dropdown-menu text-bg-dark">
                                     <li><a class="dropdown-item text-light fs-3" href="#">Mes favoris</a></li>
@@ -100,10 +100,17 @@
                                     </li>
                                 </ul>
                             </li>
+                            {{-- Lien ADMIN vers BACK OFFICE --------------------- --}}
+                            @if (Auth::user()->isAdmin())
+                                <li class="nav-item px-4">
+                                    <a class="nav-link fs-3 text-danger border border-danger rounded" href="/admin"
+                                        title="Back-office"><i class="fa-solid fa-lock p-2"></i></a>
+                                </li>
+                            @endif
                         @else
                             <li class="nav-item dropdown px-4">
-                                <a class="nav-link dropdown-toggle fs-3"  style="color: rgb(255,225,64)" href="#" role="button"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                <a class="nav-link dropdown-toggle fs-3" style="color: rgb(255,225,64)" href="#"
+                                    role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     <i class="fa-regular fa-user" style="color: rgb(255,225,64)"></i>
                                 </a>
                                 <ul class="dropdown-menu text-bg-dark">
@@ -124,10 +131,15 @@
         </nav>
 
         {{-- BANDEAU PROMOTION SI PROMO EN COURS ------------------------------------------ --}}
-        <div class="container-fluid" id="bandeau-promo">
-            @php $promo = todayPromo() @endphp
-            @include('boutique.bandeau-promo')
-        </div>
+        
+        @php $routeName = Request::route()->getName() @endphp
+        @if ($routeName != 'admin')
+            <div class="container-fluid" id="bandeau-promo">
+                @php $promo = todayPromo() @endphp
+                @include('boutique.bandeau-promo')
+            </div>
+        @endif
+
     </div>
 
 
