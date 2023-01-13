@@ -170,11 +170,11 @@
         <div class="container mb-3 pt-5" style="border-top: 1px solid grey">
             <ul class="list-group list-group-flush d-flex flex-row flex-wrap">
                 <li class="text-white list-group-item text-bg-dark mx-auto"><a class="text-decoration-none text-light"
-                        href="/produits">Nos produits</a></li>
+                        href="/articles">Nos produits</a></li>
                 <li class="text-white list-group-item text-bg-dark mx-auto"><a class="text-decoration-none text-light"
-                        href="/promotions">Promotions</a></li>
+                        href="/campagne">Promotions</a></li>
                 <li class="text-white list-group-item text-bg-dark mx-auto"><a class="text-decoration-none text-light"
-                        href="/profil">Espace client</a></li>
+                        href="{{ route('users.show', Auth::user()) }}">Espace client</a></li>
                 <li class="text-white list-group-item text-bg-dark mx-auto"><a class="text-decoration-none text-light"
                         href="/a-propos">À propos</a></li>
                 <li class="text-white list-group-item text-bg-dark mx-auto"><a class="text-decoration-none text-light"
