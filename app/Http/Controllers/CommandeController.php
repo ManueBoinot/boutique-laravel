@@ -31,6 +31,8 @@ class CommandeController extends Controller
      */
     public function store(Request $request)
     {
+
+
         if (Gate::denies('validation_commande')) {
             abort(403);
         }
@@ -39,7 +41,7 @@ class CommandeController extends Controller
         $commande = new Commande();
         $commande->numero = rand(10000, 99999);
         $commande->adresse_id = $request->input('adresse');
-        $commande->prix = $request->input('total') + $request->input('livraison');
+        $commande->prix = intval($request->input('total')) + intval($request->input('livraison'));
         $commande->user_id = $user->id;
         $commande->save();
 
