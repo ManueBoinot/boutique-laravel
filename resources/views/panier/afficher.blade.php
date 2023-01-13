@@ -8,10 +8,10 @@
             var e = document.getElementById("livraison");
             var livraison = e.value;
             document.getElementById('frais-livraison').innerHTML = livraison;
-            var total_general = parseInt(total_produit) + parseInt(livraison);
+            var total_general = parseFloat(total_produit) + parseFloat(livraison);
 
-            document.getElementById('total-general').innerHTML = total_general;
-            document.getElementById('total').value = total_general;
+            document.getElementById('total-general').innerHTML = parseFloat(total_general);
+            document.getElementById('total').value = parseFloat(total_general);
 
             if (total_produit != 0) {
                 document.getElementById('valider').style.visibility = 'visible';
@@ -33,10 +33,10 @@
                 <div class="table-responsive shadow mb-3 fs-3 text">
                     <table class="table table-hover bg-white mb-0">
                         <thead class="thead-dark">
-                            <tr>
+                            <tr class="text-uppercase">
                                 <th scope="col">#</th>
                                 <th scope="col">Produit</th>
-                                <th scope="col" class="text-end">Prix</th>
+                                <th scope="col" class="text-end">Prix unitaire</th>
                                 <th scope="col" class="text-end">Quantité</th>
                                 <th scope="col" class="text-end">Total</th>
                                 <th scope="col"></th>
@@ -49,15 +49,20 @@
                                 <!-- On incrémente le total général par le total de chaque produit du panier -->
                                 @php $total += $article['prix'] * $article['quantite'] @endphp
                                 <tr>
+                                    {{-- Colonne NUMERO LIGNE --}}
                                     <th scope="row">{{ $loop->iteration }}</th>
+                                    {{-- Colonne NOM ARTICLE --}}
                                     <td>
                                         <strong><a href="{{ route('articles.show', $cle) }}"
                                                 title="Afficher le produit">{{ $article['nom'] }}</a></strong>
                                     </td>
 
-                                    <td class="text-end">{{ $article['prix'] }} €
+                                    {{-- Colonne PRIX UNITAIRE --}}
+                                    <td class="text-end">
+                                        {{ $article['prix'] }} €
                                     </td>
 
+                                    {{-- Colonne QUANTITÉ --}}
                                     <!-- Le formulaire de mise à jour de la quantité -->
                                     <td class="text-end">
                                         <form class="d-flex justify-content-end" method="POST"
@@ -70,9 +75,10 @@
                                         </form>
                                     </td>
 
+                                    {{-- Colonne TOTAL LIGNE --}}
                                     <!-- Le total du produit = prix * quantité -->
                                     <td class="text-end">
-                                        {{ $article['prix'] * $article['quantite'], 2, ',' }} €
+                                        {{ number_format(($article['prix'] * $article['quantite']), 2, ',') }} €
                                     </td>
 
                                     <!-- Le Lien pour retirer un produit du panier -->
@@ -83,16 +89,16 @@
                                 </tr>
                             @endforeach
 
-                            <!-- On affiche total produits -->
+                            {{-- Ligne MONTANT TOTAL (AVANT LIVRAISON) --}}
                             <tr colspan="2" class="text-end">
                                 <td colspan="4">Montant total TTC</td>
                                 <td colspan="1">
-                                    <strong id="total-produit">{{ $total }} €</strong>
+                                    <strong id="total-produit">{{ number_format($total, 2, ',') }} €</strong>
                                 </td>
                                 <td colspan="1"></td>
                             </tr>
 
-                            <!-- frais de livraison -->
+                            {{-- Ligne FRAIS DE LIVRAISON --}}
                             <tr colspan="2" class="text-end">
                                 <td colspan="4">Frais de livraison</td>
                                 <td colspan="1">
@@ -101,11 +107,11 @@
                                 <td colspan="1"></td>
                             </tr>
 
+                            {{-- Ligne MONTANT TOTAL TTC --}}
                             <tr colspan="2" class="text-end">
                                 <td colspan="4">Net à payer TTC</td>
                                 <td colspan="1">
-                                    <!-- On affiche total général -->
-                                    <strong id="total-general">{{ $total }} €</strong>
+                                    <strong><span id="total-general">{{ number_format($total, 2, ',') }}</span> €</strong>
                                 </td>
                                 <td colspan="1"></td>
                             </tr>
@@ -129,7 +135,7 @@
                     <div class="row">
                         <form method="post" action="{{ route('commande.store') }}">
                             @csrf
-                            <input id="total" type="hidden" name="total" value="{{ $total }}">
+                            <input id="total" type="hidden" name="total" value="{{ number_format($total, 2, ',') }}">
 
                             @if (count($user->adresses) > 0)
                                 {{-- CHOIX MODE DE LIVRAISON --}}
@@ -138,9 +144,9 @@
                                         <select name="livraison" required class="form-control mt-2" id="livraison"
                                             onchange="calcul()">
                                             <option selected disabled value="0">Sélectionnez le mode livraison...</option>
-                                            <option value="10">Livraison à domicile (10 €)</option>
-                                            <option value="5">Livraison dans un point-relais (5 €)</option>
-                                            <option value="15">Livraison express (15 €)</option>
+                                            <option value="10,00">Livraison à domicile (10 €)</option>
+                                            <option value="5,00">Livraison dans un point-relais (5 €)</option>
+                                            <option value="15,00">Livraison express (15 €)</option>
                                         </select>
                                     </div>
 

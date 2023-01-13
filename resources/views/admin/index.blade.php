@@ -134,7 +134,6 @@
                                                     <button class="btn btn-danger">Supprimer</button>
                                                 </form>
                                             </td>
-
                                         </tr>
                                     </tbody>
                                 @endforeach
@@ -146,5 +145,7 @@
 
         </div>
     </div>
+    @include('admin.admin-gammes')
     @include('admin.admin-campagnes')
+    @include('admin.admin-users')
 @endsection

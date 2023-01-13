@@ -14,7 +14,6 @@ class Avis extends Model
         'note',
         'user_id',
         'article_id'
-
     ];
 
     // Fonction qui précise la relation avec la table "Users"

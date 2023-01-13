@@ -68,7 +68,7 @@
                                 {{-- Bouton de création de la nouvelle campagne --}}
                                 <div class="row">
                                     <div class="col mx-auto text-center">
-                                        <button class="btn btn-warning fw-bold btn-lg mt-2" type="submit">Créer la
+                                        <button class="btn btn-warning fw-bold btn-lg mt-2" type="submit">Créer la nouvelle
                                             campagne</button>
                                     </div>
                                 </div>

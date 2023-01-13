@@ -41,7 +41,7 @@ class CommandeController extends Controller
         $commande = new Commande();
         $commande->numero = rand(10000, 99999);
         $commande->adresse_id = $request->input('adresse');
-        $commande->prix = intval($request->input('total')) + intval($request->input('livraison'));
+        $commande->prix = floatval($request->input('total')) + floatval($request->input('livraison'));
         $commande->user_id = $user->id;
         $commande->save();
 
@@ -71,15 +71,7 @@ class CommandeController extends Controller
     }
 
 
-
-    /** @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-
-
-
     // ___________________________________________________________________________
-
     /**
      * Display the specified resource.
      *
@@ -92,7 +84,7 @@ class CommandeController extends Controller
         return view('users/detailscommande', ['commande' => $commande]);
     }
 
-
+    // ___________________________________________________________________________
      /* @param  int  $id
      * @return \Illuminate\Http\Response
      */

@@ -11,7 +11,8 @@
         @foreach ($gammes as $gamme)
             <div class="row">
                 <div class="col">
-                    <h2 class="text-uppercase mt-4" style="display:inline-block; color: rgb(255,225,64)">nos chocolats {{ $gamme['gamme'] }}<h2>
+                    <h2 class="text-uppercase mt-4" style="display:inline-block; color: rgb(255,225,64)">nos chocolats
+                        {{ $gamme['gamme'] }}<h2>
                 </div>
             </div>
 
@@ -36,7 +37,29 @@
 
                                     <div class="card-body">
                                         {{-- NOM ARTICLE --}}
-                                        <h3 class="card-title text-uppercase">{{ $article->nom }}</h3>
+                                        <div class="d-flex justify-content-center gap-1">
+                                            <h3 class="card-title text-uppercase">{{ $article->nom }}</h3>
+                                            {{-- Bouton FAVORIS --}}
+
+                                            <!-- si l'article est dans les favoris -->
+                                            @if (Auth::user() && Auth::user()->isInFavorites($article))
+                                                <form method="post" action="{{ route('favoris.destroy') }}">
+                                                    @csrf
+                                                    @method('delete')
+                                                    <input type="hidden" name="articleId" value="{{ $article->id }}">
+                                                    <button type="submit" class="btn"><i class="fa-solid fa-heart fs-4"
+                                                            style="color: #ffe140;"></i></button>
+                                                </form>
+
+                                                <!-- si l'article n'est pas dans les favoris -->
+                                            @else
+                                                <form method="post" action="{{ route('favoris.store') }}"> @csrf
+                                                    <input type="hidden" name="articleId" value="{{ $article->id }}">
+                                                    <button type="submit" class="btn"><i
+                                                            class="fa-regular fa-heart text-white fs-4"></i></button>
+                                                </form>
+                                            @endif
+                                        </div>
 
                                         {{-- DESCRIPTION ARTICLE --}}
                                         <p class="card-text mb-2" style="height: 100px;">
@@ -99,8 +122,6 @@
                                                         class="fa-solid fa-cart-plus p-0 m-0"></i></button>
                                             </form>
                                         @endif
-
-
                                     </div>
                                 </div>
                             </div>
