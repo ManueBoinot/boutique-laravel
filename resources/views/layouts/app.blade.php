@@ -77,7 +77,7 @@
                                     <i class="fa-regular fa-user"></i>
                                 </a>
                                 <ul class="dropdown-menu text-bg-dark">
-                                    <li><a class="dropdown-item text-light fs-3" href="#">Mes favoris</a></li>
+                                    <li><a class="dropdown-item text-light fs-3" href="{{ route('favoris.index', Auth::user()) }}">Mes favoris</a></li>
                                     <li><a class="dropdown-item text-light fs-3"
                                             href="{{ route('commande.index', Auth::user()) }}">Mes commandes</a></li>
                                     <li><a class="dropdown-item text-light fs-3"
@@ -132,8 +132,8 @@
 
         {{-- BANDEAU PROMOTION SI PROMO EN COURS ------------------------------------------ --}}
         
-        @php $routeName = Request::route()->getName() @endphp
-        @if ($routeName != 'admin')
+        {{-- @php $routeName = Request::route()->getName() @endphp --}}
+        @if ((Auth::user() && !Auth::user()->isAdmin()) || !Auth::user()) 
             <div class="container-fluid" id="bandeau-promo">
                 @php $promo = todayPromo() @endphp
                 @include('boutique.bandeau-promo')

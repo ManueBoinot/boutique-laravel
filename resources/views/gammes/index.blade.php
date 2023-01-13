@@ -1,4 +1,4 @@
-@extends('layouts.app');
+@extends('layouts.app')
 
 @section('content')
     <div class="container text-center">
@@ -11,7 +11,8 @@
         @foreach ($gammes as $gamme)
             <div class="row">
                 <div class="col">
-                    <h2 class="text-uppercase mt-4" style="display:inline-block; color: rgb(255,225,64)">nos chocolats {{ $gamme['gamme'] }}<h2>
+                    <h2 class="text-uppercase mt-4" style="display:inline-block; color: rgb(255,225,64)">nos chocolats
+                        {{ $gamme['gamme'] }}<h2>
                 </div>
             </div>
 
@@ -100,6 +101,27 @@
                                             </form>
                                         @endif
 
+                                        {{-- Bouton FAVORIS --}}
+
+                                        <!-- si l'article est dans les favoris -->
+
+                                        @if (Auth::user() && Auth::user()->isInFavorites($article))
+                                            <form method="post" action="{{ route('favoris.destroy') }}">
+                                                @csrf
+                                                @method('delete')
+                                                <input type="hidden" name="articleId" value="{{ $article->id }}">
+                                                <button type="submit" class="btn btn-danger m-2">Retirer des
+                                                    favoris</button>
+                                            </form>
+
+                                        <!-- si l'article n'est pas dans les favoris -->
+                                        @else
+                                            <form method="post" action="{{ route('favoris.store') }}"> @csrf
+                                                <input type="hidden" name="articleId" value="{{ $article->id }}">
+                                                <button type="submit" class="btn btn-success m-2">Ajouter aux
+                                                    favoris</button>
+                                            </form>
+                                        @endif
 
                                     </div>
                                 </div>

@@ -4,7 +4,7 @@
 <script>
 function calcul(){
     total_produit = document.getElementById('total-produit').innerHTML; 
-    document.getElementById('frais-livraison').innerHTML =total_produit;
+  //  document.getElementById('frais-livraison').innerHTML = total_produit;
     var e = document.getElementById("livraison");
     var livraison = e.value;
     document.getElementById('frais-livraison').innerHTML= livraison;
@@ -24,6 +24,7 @@ function calcul(){
     <div class="container">
           <!-- Initialisation du total général à 0 -->
         @php $total = 0 @endphp
+     
 
         @if (session()->has('panier'))
             <h1>Mon panier</h1>
@@ -46,6 +47,7 @@ function calcul(){
 
                         <!-- On parcourt les produits du panier en session : session('panier') -->
                         @foreach (session('panier') as $cle => $article)
+                                  
                             <!-- On incrémente le total général par le total de chaque produit du panier -->
                             @php $total += $article['prix'] * $article['quantite'] @endphp
                             <tr>
@@ -54,8 +56,11 @@ function calcul(){
                                     <strong><a href="{{ route('panier.afficher', $cle) }}"
                                             title="Afficher le produit">{{ $article['nom'] }}</a></strong>
                                 </td>
+                             
                                 <td>{{ $article['prix'] }} €</td>
+                                
                                 <td>
+
                                     <!-- Le formulaire de mise à jour de la quantité -->
                                     <form method="POST" action="{{ route('panier.ajouter', $cle) }}"
                                         class="form-inline d-inline-block">
